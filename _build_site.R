@@ -13,8 +13,8 @@
 #
 source_dir <- "src"
 output_dir <- "out"
-# website_url <- "https://github.com/f0nzie/tikz_bars"
-website_url <- "https://f0nzie.github.io/tikz_bars/"
+website_url <- "https://github.com/f0nzie/tikz_bars"
+# website_url <- "https://f0nzie.github.io/tikz_bars/"
 branch <- "develop"
 all_png <- "%s.png"
 all_tex <- "%s.tex"
