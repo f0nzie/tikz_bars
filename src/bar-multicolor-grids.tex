@@ -1,0 +1,52 @@
+% https://tex.stackexchange.com/a/427408/173708
+\documentclass[12pt]{article}
+
+%\usepackage[utf8]{inputenc}
+\usepackage{graphicx}    
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bchart}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{subfig}
+\pgfplotsset{compat=1.10}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{15pt}%         % gap around plot
+
+\definecolor{RYB2}{RGB}{245,245,245}
+\definecolor{RYB1}{RGB}{218,232,252}
+\definecolor{RYB4}{RGB}{108,142,191}
+
+\begin{document}    
+
+\begin{figure}
+    \centering    
+     \subfloat[][name]{\resizebox{1.1\textwidth}{!}{
+        \begin{tikzpicture}
+            \begin{axis}[
+                symbolic x coords={col1,,col2,,col3},
+                xticklabel style={rotate=45,anchor=north east},
+                xtick={col1,col2,col3},
+                ylabel=Passed Challenges(\%),
+                ymajorgrids,
+                bar width=17pt,
+                ]
+                \addplot[ybar,fill=RYB1] 
+                coordinates {(col1,64.71)};
+
+                \addplot[ybar,fill=RYB2] 
+                coordinates {(col2,26.57)};
+
+                \addplot[ybar,fill=RYB4] 
+                coordinates {(col3,45.42)};
+            \end{axis}
+    	\end{tikzpicture}
+	}
+}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}    
+
+\end{document}

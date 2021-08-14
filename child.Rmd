@@ -15,6 +15,36 @@ cat(readLines("./src/bar-horiz-5_points.tex"), sep = "\n")
 `r b`
 ****
 
+### [bar-interval.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-interval.tex)
+
+![](./out/bar-interval.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bar-interval.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [bar-multicolor-grids.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-grids.tex)
+
+![](./out/bar-multicolor-grids.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bar-multicolor-grids.tex"), sep = "\n")
+```
+`r b`
+****
+
 ### [bar-multicolor.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor.tex)
 
 ![](./out/bar-multicolor.png)

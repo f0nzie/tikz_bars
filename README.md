@@ -96,9 +96,9 @@ Some useful tutorials:
 
 ## Useful statistics
 
-* There are 4 total Tikz figures saved as `.tex` files in this gallery. 
+* There are 6 total Tikz figures saved as `.tex` files in this gallery. 
 The figures are sorted by filename.
-* There are 4 files under `src/` to be compiled with `pdflatex`
+* There are 6 files under `src/` to be compiled with `pdflatex`
 * There are 0 files under `src/` to be compiled with `lualatex`
 * There are 0 data files under the folder `src/data` that are being used by the TikZ scripts
 * There are 0 Latex classes, styles and library files under the `src/texmf` folder
@@ -149,6 +149,128 @@ The figures are sorted by filename.
 	 (5,3) (6,4) (1,5)};
 \end{axis}
 \end{tikzpicture}
+\end{document}
+```
+****
+
+### [bar-interval.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-interval.tex)
+
+![](./out/bar-interval.png)
+
+  
+
+
+```tex
+\documentclass{standalone}   % change from article to standalone
+
+
+
+% translate with >> pdflatex -shell-escape <file>
+
+% This file is an extract of the PGFPLOTS manual, copyright by Christian Feuersaenger.
+% 
+% Feel free to use it as long as you cite the pgfplots manual properly.
+%
+% See
+%   http://pgfplots.sourceforge.net/pgfplots.pdf
+% for the complete manual.
+%
+% Any required input files (for <plot table> or <plot file> or the table package) can be downloaded
+% at
+% http://www.ctan.org/tex-archive/graphics/pgf/contrib/pgfplots/doc/latex/
+% and
+% http://www.ctan.org/tex-archive/graphics/pgf/contrib/pgfplots/doc/latex/plotdata/
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+\pagestyle{empty}
+
+\begin{document}
+\begin{tikzpicture}
+	\begin{axis}[
+		ybar interval=0.90,    % separation between bars
+		x tick label as interval,
+		xmin=2003,xmax=2030,
+		ymin=0,ymax=140,
+		xticklabel={
+			$\pgfmathprintnumber{\tick}$
+			-- $\pgfmathprintnumber{\nexttick}$},
+		xtick=data,
+		x tick label style={
+			rotate=90,anchor=east,
+			/pgf/number format/1000 sep=}
+		]
+		
+		\addplot[draw=blue,fill=blue!40!white]
+		coordinates
+		{(2003,40) (2005,100) (2006,15) 
+			(2010,90) (2020,120) (2030,3)};
+	\end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
+### [bar-multicolor-grids.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-grids.tex)
+
+![](./out/bar-multicolor-grids.png)
+
+  
+
+
+```tex
+% https://tex.stackexchange.com/a/427408/173708
+\documentclass[12pt]{article}
+
+%\usepackage[utf8]{inputenc}
+\usepackage{graphicx}    
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bchart}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{subfig}
+\pgfplotsset{compat=1.10}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{15pt}%         % gap around plot
+
+\definecolor{RYB2}{RGB}{245,245,245}
+\definecolor{RYB1}{RGB}{218,232,252}
+\definecolor{RYB4}{RGB}{108,142,191}
+
+\begin{document}    
+
+\begin{figure}
+    \centering    
+     \subfloat[][name]{\resizebox{1.1\textwidth}{!}{
+        \begin{tikzpicture}
+            \begin{axis}[
+                symbolic x coords={col1,,col2,,col3},
+                xticklabel style={rotate=45,anchor=north east},
+                xtick={col1,col2,col3},
+                ylabel=Passed Challenges(\%),
+                ymajorgrids,
+                bar width=17pt,
+                ]
+                \addplot[ybar,fill=RYB1] 
+                coordinates {(col1,64.71)};
+
+                \addplot[ybar,fill=RYB2] 
+                coordinates {(col2,26.57)};
+
+                \addplot[ybar,fill=RYB4] 
+                coordinates {(col3,45.42)};
+            \end{axis}
+    	\end{tikzpicture}
+	}
+}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}    
+
 \end{document}
 ```
 ****
