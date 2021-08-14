@@ -1,5 +1,5 @@
 # Site settings
-baseurl = "https://f0nzie.github.io/tikz_favorites/"
+baseurl = "https://f0nzie.github.io/tikz_bars/"
 languageCode = "en-us"
 title = "My Tikz Bars"
 themesDir = "./themes/"
