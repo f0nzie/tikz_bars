@@ -96,9 +96,9 @@ Some useful tutorials:
 
 ## Useful statistics
 
-* There are 3 total Tikz figures saved as `.tex` files in this gallery. 
+* There are 4 total Tikz figures saved as `.tex` files in this gallery. 
 The figures are sorted by filename.
-* There are 3 files under `src/` to be compiled with `pdflatex`
+* There are 4 files under `src/` to be compiled with `pdflatex`
 * There are 0 files under `src/` to be compiled with `lualatex`
 * There are 0 data files under the folder `src/data` that are being used by the TikZ scripts
 * There are 0 Latex classes, styles and library files under the `src/texmf` folder
@@ -259,6 +259,53 @@ The figures are sorted by filename.
         \addplot table[x=interval,y=carR]{\mydata};
         \legend{Trips, Distance, Energy}
     \end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
+### [bars-2-yes-no.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bars-2-yes-no.tex)
+
+![](./out/bars-2-yes-no.png)
+
+  
+
+
+```tex
+\documentclass{standalone}
+% translate with >> pdflatex -shell-escape <file>
+
+% This file is an extract of the PGFPLOTS manual, copyright by Christian Feuersaenger.
+% 
+% Feel free to use it as long as you cite the pgfplots manual properly.
+%
+% See
+%   http://pgfplots.sourceforge.net/pgfplots.pdf
+% for the complete manual.
+%
+% Any required input files (for <plot table> or <plot file> or the table package) can be downloaded
+% at
+% http://www.ctan.org/tex-archive/graphics/pgf/contrib/pgfplots/doc/latex/
+% and
+% http://www.ctan.org/tex-archive/graphics/pgf/contrib/pgfplots/doc/latex/plotdata/
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+\pagestyle{empty}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+    xbar, xmin=0,
+    width=12cm, height=3.5cm, enlarge y limits=0.5,
+    xlabel={\#participants},
+    symbolic y coords={no,yes},
+    ytick=data,
+    nodes near coords, nodes near coords align={horizontal},
+    ]
+    \addplot coordinates {(3,no) (7,yes)};
+  \end{axis}
 \end{tikzpicture}
 \end{document}
 ```

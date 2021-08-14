@@ -1,24 +1,32 @@
 [[items]]
 title = "bar-horiz-5_points"
-image = "https://github.com/f0nzie/tikz_bars/raw/master/out/bar-horiz-5_points.png"
-thumb = "https://github.com/f0nzie/tikz_bars/raw/master/out/bar-horiz-5_points.png"
+image = "../out/bar-horiz-5_points.png"
+thumb = "../out/bar-horiz-5_points.png"
 alt = "bar-horiz-5_points"
-description = "https://github.com/f0nzie/tikz_bars"
-url = "https://github.com/f0nzie/tikz_bars/blob/master/src/bar-horiz-5_points.tex"
+description = "f0nzie.github.io/tikz_bars/"
+url = "../src/bar-horiz-5_points.tex"
  
 [[items]]
 title = "bar-multicolor"
-image = "https://github.com/f0nzie/tikz_bars/raw/master/out/bar-multicolor.png"
-thumb = "https://github.com/f0nzie/tikz_bars/raw/master/out/bar-multicolor.png"
+image = "../out/bar-multicolor.png"
+thumb = "../out/bar-multicolor.png"
 alt = "bar-multicolor"
-description = "https://github.com/f0nzie/tikz_bars"
-url = "https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor.tex"
+description = "f0nzie.github.io/tikz_bars/"
+url = "../src/bar-multicolor.tex"
  
 [[items]]
 title = "barchart"
-image = "https://github.com/f0nzie/tikz_bars/raw/master/out/barchart.png"
-thumb = "https://github.com/f0nzie/tikz_bars/raw/master/out/barchart.png"
+image = "../out/barchart.png"
+thumb = "../out/barchart.png"
 alt = "barchart"
-description = "https://github.com/f0nzie/tikz_bars"
-url = "https://github.com/f0nzie/tikz_bars/blob/master/src/barchart.tex"
+description = "f0nzie.github.io/tikz_bars/"
+url = "../src/barchart.tex"
+ 
+[[items]]
+title = "bars-2-yes-no"
+image = "../out/bars-2-yes-no.png"
+thumb = "../out/bars-2-yes-no.png"
+alt = "bars-2-yes-no"
+description = "f0nzie.github.io/tikz_bars/"
+url = "../src/bars-2-yes-no.tex"
  
