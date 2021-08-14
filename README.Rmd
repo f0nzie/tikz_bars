@@ -9,7 +9,33 @@ output:
     number_sections: false
 ---
 
+```{r, include=FALSE}
+# These are variables that need to be set for any TikZ website
+website_url <- "https://github.com/f0nzie/tikz_bars"
+source_dir <- "src"
+output_dir <- "out"
+tikz_ext <- ".tex"
+image_ext <- ".png"
+png_dir <- output_dir
+data_files <- file.path(source_dir, "data")
+cls_sty_files <- file.path(source_dir, "texmf")
+url_source <- paste(website_url, "blob/master", source_dir, sep = "/")
+dir_level <- "./"
 
+# This will generate the template that will be used to add a TikZ page per graphic
+# gsub makes many replacements per line. very greedy
+library(magrittr)
+readLines('template.Rmd') %>% 
+  gsub("\\{png_dir\\}",  png_dir, .)  %>% 
+  gsub("\\{image_ext\\}", image_ext, .) %>% 
+  # sub only replaces one occurrence per line
+  gsub("\\{tikz_ext\\}", tikz_ext, .) %>% 
+  gsub("\\{source_dir\\}", source_dir, .) %>% 
+  gsub("\\{url_source\\}", url_source, .) %>% 
+  gsub("\\{dir_level\\}", dir_level, .) %>% 
+  writeLines("_template.Rmd")     # this should be deleted at the end
+# TODO: use a temporary file for this.
+```
 
 
 ## NEWS
@@ -85,185 +111,95 @@ Some useful tutorials:
   * [TikZ Tutorial](https://indico.scc.kit.edu/event/48/contributions/3405/attachments/1693/2321/tikz_tutorial.pdf)
   
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+               comment = NA,
+               results = "asis",
+               error = FALSE,
+               warning = FALSE,
+               message = FALSE)
+a <- "```tex"
+b <- "```"
+```
+
+```{r, include=FALSE}
+# add file suffix for file selection
+suffix <- ""
+ext <- "png"
+pattern <- paste0("^", suffix, ".*", "\\.", ext, "$")
+
+
+if (file.exists("child.Rmd")) file.remove("child.Rmd")
+tmp <- readLines("_template.Rmd")
+
+# get all PGF files
+pgf <- sub(x = list.files(path = source_dir, pattern = "*.pgf$"),
+           pattern = "\\.pgf$",
+           replacement = "")
+
+
+tikz_files_all <- list.files(path = source_dir, pattern = "*\\.tex$")
+tikz_lualatex <- grep(pattern = "\\.lualatex\\.tex$", x = tikz_files_all, value = TRUE)
+tikz_pdflatex <- grep(pattern = "^.*(?<!\\.lualatex\\.tex)$", x = tikz_files_all, 
+                      value = TRUE, perl = TRUE)
+data_files <- list.files(path = data_files, pattern = "*\\.dat$|*\\.csv$|*\\.txt$")
+texmf_files <- list.files(path = cls_sty_files)
+
+tex <- sub(x = tikz_files_all,
+           pattern = "\\.tex$",
+           replacement = "")
+
+
+# get all PNG files
+png <- sub(x = list.files(path = output_dir, pattern = pattern),
+           pattern = "\\.png$",
+           replacement = "")
+
+if (length(png) == 0) stop("No TikZ objects available")
+
+# Common tex and png files
+# if a PDF has its PNG generated file
+i <- intersect(tex, png)
+
+```
 
 
 
-
-
-
-
+```{r include=FALSE}
+# create notebook child.Rmd
+sapply(i,
+       FUN = function(i){
+           tmpi <- gsub(x = tmp,
+                        pattern = "&PGF_FILE&",
+                        replacement = i)
+           cat(tmpi,
+               file = "child.Rmd",
+               append = TRUE,
+               sep= "\n")
+       })
+```
 
 
 ## Useful statistics
 
-* There are 3 total Tikz figures saved as `.tex` files in this gallery. 
+* There are `r length(i)` total Tikz figures saved as `.tex` files in this gallery. 
 The figures are sorted by filename.
-* There are 3 files under `src/` to be compiled with `pdflatex`
-* There are 0 files under `src/` to be compiled with `lualatex`
-* There are 0 data files under the folder `src/data` that are being used by the TikZ scripts
-* There are 0 Latex classes, styles and library files under the `src/texmf` folder
+* There are `r length(tikz_pdflatex)` files under `src/` to be compiled with `pdflatex`
+* There are `r length(tikz_lualatex)` files under `src/` to be compiled with `lualatex`
+* There are `r length(data_files)` data files under the folder `src/data` that are being used by the TikZ scripts
+* There are `r length(texmf_files)` Latex classes, styles and library files under the `src/texmf` folder
 
 
 
 ## TikZ graphics and code
 
-
-****
-
-### [bar-horiz-5_points.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-horiz-5_points.tex)
-
-![](./out/bar-horiz-5_points.png)
-
-  
-
-
-```tex
-\documentclass{standalone}
-%\documentclass{article}
-% translate with >> pdflatex -shell-escape <file>
-
-% This file is an extract of the PGFPLOTS manual, copyright by Christian Feuersaenger.
-%
-% Feel free to use it as long as you cite the pgfplots manual properly.
-%
-% See
-%   http://pgfplots.sourceforge.net/pgfplots.pdf
-% for the complete manual.
-%
-% Any required input files (for <plot table> or <plot file> or the table package) can be downloaded
-% at
-% http://www.ctan.org/tex-archive/graphics/pgf/contrib/pgfplots/doc/latex/
-% and
-% http://www.ctan.org/tex-archive/graphics/pgf/contrib/pgfplots/doc/latex/plotdata/
-
-\usepackage{pgfplots}
-\pgfplotsset{compat=newest}
-
-\pagestyle{empty}
-
-\begin{document}
-\begin{tikzpicture}
-\begin{axis}
-\addplot+[xbar] coordinates
-	{(4,0) (1,1) (2,2)
-	 (5,3) (6,4) (1,5)};
-\end{axis}
-\end{tikzpicture}
-\end{document}
-```
-****
-
-### [bar-multicolor.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor.tex)
-
-![](./out/bar-multicolor.png)
-
-  
-
-
-```tex
-% https://www.latex4technics.com/?note=U130YI
-% https://tex.stackexchange.com/a/370552/173708
-\documentclass[a4paper, 12pt]{article}
-\usepackage[paperwidth=5in, paperheight=3.2in]{geometry}
-\usepackage{pgfplots}
-\pgfplotsset{compat=newest}
-\geometry{left=0mm, right=3mm,top=6mm, bottom=3mm,}
-
-\definecolor{mygr}{HTML}{e6e6e6}
-
-\begin{document}
-\begin{figure}[!t]
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[
-        /pgf/number format/1000 sep={},
-        width=3.8in,
-        height=1.8in,
-        at={(0.758in,0.981in)},
-        scale only axis,
-        clip=false,
-        separate axis lines,
-        axis on top,
-        xmin=0,
-        xmax=5,
-        xtick={1,2,3,4},
-        x tick style={draw=none},
-        xticklabels={GREEN,BLUE,GREY,RED},
-        ytick={0, 500, 1000, 2000},
-        ymin=0,
-        ymax=2000,
-        ylabel={YYY},
-        ymajorgrids,
-        every axis plot/.append style={
-          ybar,
-          bar width=.2,
-          bar shift=0pt,
-          fill
-        }
-      ]
-      \addplot[green]coordinates {(1,600)};
-      \addplot[blue]coordinates{(2,1100)};
-      \addplot[mygr]coordinates{(3,1200)};
-      \addplot[red]coordinates{(4,1800)};
-    \end{axis}
-  \end{tikzpicture}
-\end{figure}
-\end{document}
-```
-****
-
-### [barchart.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/barchart.tex)
-
-![](./out/barchart.png)
-
-  
-
-
-```tex
-% https://tex.stackexchange.com/a/157028/173708
-% arara: pdflatex
-% !arara: indent: {overwrite: yes}
-\documentclass[tikz]{standalone}
-
-\usepackage{pgfplots}
-
-\begin{document}
-
-\pgfplotstableread[row sep=\\,col sep=&]{
-    interval & carT & carD & carR \\
-    0--2     & 1.2  & 0.1  & 0.2  \\
-    2--5     & 12.8 & 3.8  & 4.9  \\
-    5--10    & 15.5 & 10.4 & 13.4 \\
-    10--20   & 14.0 & 17.3 & 22.2 \\
-    20--50   & 7.9  & 21.1 & 27.0 \\
-    50+      & 3.0  & 22.3 & 28.6 \\
-    }\mydata
-
-\begin{tikzpicture}
-    \begin{axis}[
-            ybar,
-            bar width=.5cm,
-            width=\textwidth,
-            height=.5\textwidth,
-            legend style={at={(0.5,1)},
-                anchor=north,legend columns=-1},
-            symbolic x coords={0--2,2--5,5--10,10--20,20--50,50+},
-            xtick=data,
-            nodes near coords,
-            nodes near coords align={vertical},
-            ymin=0,ymax=35,
-            ylabel={\%},
-        ]
-        \addplot table[x=interval,y=carT]{\mydata};
-        \addplot table[x=interval,y=carD]{\mydata};
-        \addplot table[x=interval,y=carR]{\mydata};
-        \legend{Trips, Distance, Energy}
-    \end{axis}
-\end{tikzpicture}
-\end{document}
+```{r, child = "child.Rmd"}
 ```
 
-
+```{r}
+# delete dummy template
+invisible(if (file.exists("_template.Rmd")) file.remove("_template.Rmd") )
+```
 
 
 
