@@ -2,3 +2,13 @@
 .Rhistory
 .RData
 .Ruserdata
+
+*.log
+
+*.aux
+
+src/bar-horiz-5_points.synctex.gz
+
+*.gz
+
+*.pdf
