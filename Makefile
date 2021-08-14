@@ -1,4 +1,12 @@
 
+SOURCE_DIR  = src
+TIKZ_LIBS = $(wildcard $(SOURCE_DIR)/*.code.tex)
+TEX_FILES_ALL_ = $(wildcard $(SOURCE_DIR)/*.tex)
+TIKZ_FILES_ALL  = $(filter-out $(TIKZ_LIBS), $(TEX_FILES_ALL_))
+TIKZ_LUALATEX = $(filter %.lualatex.tex, $(TIKZ_FILES_ALL))
+TIKZ_LATEX = $(filter-out  $(TIKZ_LUALATEX), $(TIKZ_FILES_ALL))
+PDF_LATEX = $(addprefix out/, $(addsuffix .pdf, $(basename  $(notdir $(TIKZ_LATEX) ))))
+
 
 
 # Detect operating system. Sort of tricky for Windows because of MSYS, cygwin, MGWIN
@@ -42,6 +50,18 @@ endif
 
 
 
+
+
+.PHONY: info
+info:
+	@echo $(words $(TIKZ_LIBS))
+	@echo $(words $(TEX_FILES_ALL_))
+	@echo $(words $(TIKZ_FILES_ALL))
+	@echo $(words $(TIKZ_LATEX))
+	@echo $(words $(TIKZ_LATEX))
+	@echo $(words $(TIKZ_LUALATEX))
+	@echo $(TIKZ_LIBS)
+	@echo $(words $(PDF_LATEX))
 
 
 

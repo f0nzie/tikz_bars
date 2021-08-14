@@ -8,7 +8,21 @@
 4. Place the tikz files under the folder `src`
 5. Test that the tikz files build. (i) from the [command line][#commandline]; or from (ii) TexStudio
 6. Use a Makefile to automate the build of the tex files
-7. 
+
+
+
+
+
+
+
+## Makefile
+
+1. Get OS information
+2. Get list of tex files to compile
+
+
+
+
 
 
 
