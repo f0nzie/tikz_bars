@@ -88,3 +88,78 @@ cat(readLines("./src/barchart.tex"), sep = "\n")
 cat(readLines("./src/bars-2-yes-no.tex"), sep = "\n")
 ```
 `r b`
+****
+
+### [dynamic-axis-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-axis-pgf.tex)
+
+![](./out/dynamic-axis-pgf.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-axis-pgf.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-autocolor.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-autocolor.tex)
+
+![](./out/dynamic-barchart-autocolor.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-autocolor.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-color-from-table-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-color-from-table-pgf.tex)
+
+![](./out/dynamic-barchart-color-from-table-pgf.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-color-from-table-pgf.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-discard-column-fm-table-4star-.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-discard-column-fm-table-4star-.tex)
+
+![](./out/dynamic-barchart-discard-column-fm-table-4star-.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-discard-column-fm-table-4star-.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-discard-column-fm-table-9000-4star-.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-discard-column-fm-table-9000-4star-.tex)
+
+![](./out/dynamic-barchart-discard-column-fm-table-9000-4star-.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-discard-column-fm-table-9000-4star-.tex"), sep = "\n")
+```
+`r b`

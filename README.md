@@ -96,9 +96,9 @@ Some useful tutorials:
 
 ## Useful statistics
 
-* There are 6 total Tikz figures saved as `.tex` files in this gallery. 
+* There are 11 total Tikz figures saved as `.tex` files in this gallery. 
 The figures are sorted by filename.
-* There are 6 files under `src/` to be compiled with `pdflatex`
+* There are 11 files under `src/` to be compiled with `pdflatex`
 * There are 0 files under `src/` to be compiled with `lualatex`
 * There are 0 data files under the folder `src/data` that are being used by the TikZ scripts
 * There are 0 Latex classes, styles and library files under the `src/texmf` folder
@@ -429,6 +429,384 @@ The figures are sorted by filename.
     \addplot coordinates {(3,no) (7,yes)};
   \end{axis}
 \end{tikzpicture}
+\end{document}
+```
+****
+
+### [dynamic-axis-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-axis-pgf.tex)
+
+![](./out/dynamic-axis-pgf.png)
+
+  
+
+
+```tex
+
+% https://tex.stackexchange.com/a/424443/173708
+% used PGFPlots v1.15
+\documentclass[border=5pt]{standalone}
+\usepackage{pgfplots}
+    \usetikzlibrary{
+        arrows.meta,
+    }
+    \pgfplotsset{
+        compat=1.15,
+        % create custom style and add all keys/options that are valid for this
+        % particular style
+        my axis style/.style={
+            axis x line=middle,
+            axis y line=middle,
+            axis line style={
+                thick,
+                -Latex,
+            },
+            %% Definition, where to put the description of the axes.
+            xlabel style={
+                at={(ticklabel cs:1)},
+                anchor=north east,
+                font=\small\sffamily,
+            },
+            ylabel style={
+                at={(ticklabel cs:1)},
+                anchor=south east,
+                rotate=90,
+                font=\small\sffamily,
+            },
+            ticks=none,
+        },
+        % (this is for demonstration purposes only)
+        % this is a style very similar to the previous one ...
+        my similar axis style/.style={
+            % ... so you can use the previous one as a basis
+            my axis style,
+            % and than add options that should be added to this style
+            xlabel={Menge $x$},
+            ylabel={Rate $\frac{d\,x}{d\,t}$},
+        },
+    }
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+        % load custom style when needed/appropriate
+        my similar axis style,
+        % load keys/options that are only valid for this `axis' environment
+        xmax=4,
+    ]
+        \addplot [domain=0:3] {1.2};
+    \end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
+### [dynamic-barchart-autocolor.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-autocolor.tex)
+
+![](./out/dynamic-barchart-autocolor.png)
+
+  
+
+
+```tex
+% Color of bar plot depending on the bar height (pgfplot)
+% https://tex.stackexchange.com/questions/132081/color-of-bar-plot-depending-on-the-bar-height-pgfplot?noredirect=1&lq=1
+\documentclass{standalone}
+\usepackage{pgfplots,pgfplotstable}
+
+\begin{document}
+	
+\begin{tikzpicture}
+  \begin{axis}[
+      colorbar,
+    point meta min=30, point meta max=80,
+    only marks,
+    scatter,
+    scatter src=x,
+    clip mode=individual,
+    scatter/@pre marker code/.append code={
+            \pgfkeys{/pgf/fpu=true,/pgf/fpu/output format=fixed}
+            \pgfmathsetmacro\negheight{-\pgfplotspointmeta}         
+            \fill [draw=black] (axis direction cs:0,0.3) rectangle (axis direction cs:\negheight,-0.3);
+            \pgfplotsset{mark=none}
+        },
+    xmin=0,
+    width=12cm, height=5cm, enlarge y limits=0.5,
+    xlabel={\#participants},
+    ytick=data,
+    yticklabels={No, Yes, Maybe}
+    ]
+    \addplot table [y expr=\coordindex] {
+    Participants Answer
+    30 no
+    40 yes
+    80 maybe
+    };
+  \end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
+### [dynamic-barchart-color-from-table-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-color-from-table-pgf.tex)
+
+![](./out/dynamic-barchart-color-from-table-pgf.png)
+
+  
+
+
+```tex
+\documentclass{standalone}
+\usepackage{pgfplots, pgfplotstable}
+
+\pgfplotsset{compat=1.16}
+\usetikzlibrary{calc}
+\usepackage[utf8]{inputenc}
+
+\pgfkeys{/pgf/shapes/xbar/height/.initial=10cm,/pgf/shapes/xbar/width/.initial=6pt}
+\pgfdeclareplotmark{xbar}{%
+	\pgfpathrectangle{\pgfpoint{0pt}{-.5*\pgfkeysvalueof{/pgf/shapes/xbar/width}}{0pt}}{%
+		\pgfpoint{-\pgfkeysvalueof{/pgf/shapes/xbar/height}}{\pgfkeysvalueof{/pgf/shapes/xbar/width}}}
+	\pgfusepath{stroke,fill}}
+
+\begin{document}
+	
+\pgfplotstableread[col sep=comma]{
+	label,startyear,endyear,color  
+	Washington, 1789, 1797, black!50
+	Adams, 1797, 1801, red!30
+	Jefferson, 1801, 1809, green!50
+	Madison, 1801, 1809, green!50
+}\loadedtable
+
+% sort by startyear
+\pgfplotstablesort[sort key=startyear]\sortedtable\loadedtable
+
+\begin{tikzpicture}
+	\begin{axis}[xmin=1785,xmax=1810,height=4cm,
+		/pgf/shapes/xbar/width=0.2cm,
+		axis lines=left,
+		width=\textwidth, 
+		enlarge y limits={abs=0.5},
+		ytick=\empty,
+		scatter/@pre marker code/.code={
+			\pgfplotstablegetelem{\coordindex}{color}\of{\sortedtable}
+			\edef\mycolor{\pgfplotsretval}
+			\pgfplotstablegetelem{\coordindex}{startyear}\of{\sortedtable}
+			\edef\startyear{\pgfplotsretval}
+			\pgfplotstablegetelem{\coordindex}{endyear}\of{\sortedtable}
+			\edef\endyear{\pgfplotsretval}
+			\pgfmathsetmacro{\myheight}{(\endyear-\startyear)*\xunit}
+			\scope[fill=\mycolor,/pgf/shapes/xbar/height=\myheight pt]},
+		]
+		
+		\addplot [xbar stacked,draw=none, forget plot] table [col sep=comma,x=startyear, y expr=-\coordindex]{\sortedtable};
+		\path let \p1=($(1786,0)-(1785,0)$)    in \pgfextra{\xdef\xunit{\x1}}; % measure x unit
+		\addplot[only marks,scatter,mark=xbar,
+		nodes near coords*,
+		nodes near coords align={anchor=west},
+		point meta=explicit symbolic, every node near coord/.append style={black}] 
+		table[col sep=comma,y expr=-\coordindex,x expr=\thisrow{endyear},meta=label]{\sortedtable};
+	
+	\end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
+### [dynamic-barchart-discard-column-fm-table-4star-.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-discard-column-fm-table-4star-.tex)
+
+![](./out/dynamic-barchart-discard-column-fm-table-4star-.png)
+
+  
+
+
+```tex
+% Different color for individual bar in bar chart & adding bar labels
+% https://tex.stackexchange.com/questions/80012/different-color-for-individual-bar-in-bar-chart-adding-bar-labels
+
+%\documentclass{article}
+\documentclass{standalone}
+\usepackage{filecontents}
+\usepackage{tikz}
+\usepackage{pgfplots,pgfplotstable} 
+
+\pgfplotsset{
+	discard if/.style 2 args={
+	    x filter/.code={
+	        \ifdim\thisrow{#1} pt=#2pt
+	            \def\pgfmathresult{inf}
+	        \fi
+	    }
+	},
+	discard if not/.style 2 args={
+	    x filter/.code={
+	        \ifdim\thisrow{#1} pt=#2pt
+	        \else
+	            \def\pgfmathresult{inf}
+	        \fi
+	    }
+	}
+}
+
+\begin{filecontents}{EvalAbgelehntePP.dat}
+	Wert PP  HaeufigkeitAbs  HaeufigkeitRel
+	1    4        682        61.49684400360685
+	2    5        630        56.80793507664562
+	3    7        457        41.2082957619477
+	4    9        414        37.33092876465284
+	5    1        403        36.339044183949504
+	6    8        394        35.527502254283135
+	7    6        360        32.46167718665464
+	8    3        268        24.16591523895401
+	9    2        254        22.90351668169522
+	10  10        207        18.66546438232642
+	11  {\rotatebox{90}{not rejected}}  226 20.378719567177637
+\end{filecontents}
+
+\begin{document}
+
+\begin{tikzpicture} 
+	\begin{axis}[ 
+	    ybar,
+	    xtick={1,...,11},
+%	    xtick=data,       % get xticks from data
+	    xticklabels from table = {EvalAbgelehntePP.dat}{PP},
+	    xtick align=inside,
+	    xlabel={production programms},
+	    every axis x label/.style={at={(ticklabel cs:0.5)},anchor=near ticklabel},
+	    ylabel=occurrence,
+	    every axis y label/.style={at={(ticklabel cs:0.5)},rotate=90,anchor=near ticklabel}
+	] 
+	
+	% first layer
+	\addplot[ybar, bar shift=0pt, fill=blue,
+	    discard if={Wert}{11},
+	    nodes near coords=\pgfmathprintnumber{\pgfplotspointmeta}\%,
+	    every node near coord/.style={
+	        font=\scriptsize,
+	        /pgf/number format/precision=0
+	    },
+	    point meta=explicit] table [ 
+	    x=Wert, 
+	    y=HaeufigkeitAbs,
+	    meta=HaeufigkeitRel
+	] {EvalAbgelehntePP.dat} ;
+	
+	% second layer
+	\addplot[ybar, bar shift=0pt, fill=orange,
+	    discard if not={Wert}{11},
+	    nodes near coords=\pgfmathprintnumber{\pgfplotspointmeta}\%,
+	    every node near coord/.style={
+	        font=\scriptsize,
+	        /pgf/number format/precision=0
+	    },
+	    point meta=explicit] table [ 
+	    x=Wert, 
+	    y=HaeufigkeitAbs,
+	    meta=HaeufigkeitRel
+	] {EvalAbgelehntePP.dat} ;
+	
+	\end{axis} 
+\end{tikzpicture} 
+
+\end{document}
+```
+****
+
+### [dynamic-barchart-discard-column-fm-table-9000-4star-.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-discard-column-fm-table-9000-4star-.tex)
+
+![](./out/dynamic-barchart-discard-column-fm-table-9000-4star-.png)
+
+  
+
+
+```tex
+% Different color for individual bar in bar chart & adding bar labels
+% https://tex.stackexchange.com/questions/80012/different-color-for-individual-bar-in-bar-chart-adding-bar-labels
+
+\documentclass{standalone}
+\usepackage{filecontents}
+\usepackage{tikz}
+\usepackage{pgfplots,pgfplotstable} 
+
+\pgfplotsset{
+	discard if/.style 2 args={
+	    x filter/.code={
+	        \ifdim\thisrow{#1} pt=#2pt
+	            \def\pgfmathresult{inf}
+	        \fi
+	    }
+	},
+	discard if not/.style 2 args={
+	    x filter/.code={
+	        \ifdim\thisrow{#1} pt=#2pt
+	        \else
+	            \def\pgfmathresult{inf}
+	        \fi
+	    }
+	}
+}
+
+\begin{filecontents}{EvalAbgelehntePP.dat}
+	Wert PP  HaeufigkeitAbs  HaeufigkeitRel
+	1    4        682        61.49684400360685
+	2    5        630        56.80793507664562
+	3    7        457        41.2082957619477
+	4    9        414        37.33092876465284
+	5    1        403        36.339044183949504
+	6    8        394        35.527502254283135
+	7    6        360        32.46167718665464
+	8    3        268        24.16591523895401
+	9    2        254        22.90351668169522
+	10  10        207        18.66546438232642
+	11  {\rotatebox{90}{not rejected}}  226 20.378719567177637
+\end{filecontents}
+
+\begin{document}
+
+\begin{tikzpicture} 
+	\begin{axis}[ 
+	    ybar,
+%	    xtick={1,...,11},
+	    xtick=data,       % get xticks from data
+	    xticklabels from table = {EvalAbgelehntePP.dat}{PP},
+	    xtick align=inside,
+	    xlabel={production programms},
+	    every axis x label/.style={at={(ticklabel cs:0.5)},anchor=near ticklabel},
+	    ylabel=occurrence,
+	    every axis y label/.style={at={(ticklabel cs:0.5)},rotate=90,anchor=near ticklabel}
+	] 
+	
+	% first layer
+	\addplot[ybar, bar shift=0pt, fill=blue,
+	    discard if={Wert}{11},
+	    nodes near coords=\pgfmathprintnumber{\pgfplotspointmeta}\%,
+	    every node near coord/.style={
+	        font=\scriptsize,
+	        /pgf/number format/precision=0
+	    },
+	    point meta=explicit] table [ 
+	    x=Wert, 
+	    y=HaeufigkeitAbs,
+	    meta=HaeufigkeitRel
+	] {EvalAbgelehntePP.dat} ;
+	
+	% second layer
+	\addplot[ybar, bar shift=0pt, fill=orange,
+	    discard if not={Wert}{11},
+	    nodes near coords=\pgfmathprintnumber{\pgfplotspointmeta}\%,
+	    every node near coord/.style={
+	        font=\scriptsize,
+	        /pgf/number format/precision=0
+	    },
+	    point meta=explicit] table [ 
+	    x=Wert, 
+	    y=HaeufigkeitAbs,
+	    meta=HaeufigkeitRel
+	] {EvalAbgelehntePP.dat} ;
+	
+	\end{axis} 
+\end{tikzpicture} 
+
 \end{document}
 ```
 

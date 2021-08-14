@@ -1,0 +1,55 @@
+
+% https://tex.stackexchange.com/a/424443/173708
+% used PGFPlots v1.15
+\documentclass[border=5pt]{standalone}
+\usepackage{pgfplots}
+    \usetikzlibrary{
+        arrows.meta,
+    }
+    \pgfplotsset{
+        compat=1.15,
+        % create custom style and add all keys/options that are valid for this
+        % particular style
+        my axis style/.style={
+            axis x line=middle,
+            axis y line=middle,
+            axis line style={
+                thick,
+                -Latex,
+            },
+            %% Definition, where to put the description of the axes.
+            xlabel style={
+                at={(ticklabel cs:1)},
+                anchor=north east,
+                font=\small\sffamily,
+            },
+            ylabel style={
+                at={(ticklabel cs:1)},
+                anchor=south east,
+                rotate=90,
+                font=\small\sffamily,
+            },
+            ticks=none,
+        },
+        % (this is for demonstration purposes only)
+        % this is a style very similar to the previous one ...
+        my similar axis style/.style={
+            % ... so you can use the previous one as a basis
+            my axis style,
+            % and than add options that should be added to this style
+            xlabel={Menge $x$},
+            ylabel={Rate $\frac{d\,x}{d\,t}$},
+        },
+    }
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+        % load custom style when needed/appropriate
+        my similar axis style,
+        % load keys/options that are only valid for this `axis' environment
+        xmax=4,
+    ]
+        \addplot [domain=0:3] {1.2};
+    \end{axis}
+\end{tikzpicture}
+\end{document}
