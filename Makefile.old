@@ -1,0 +1,152 @@
+
+UNAME_S = $(shell uname -s)
+SOURCE_DIR  = src
+TIKZ_LIBS = $(wildcard $(SOURCE_DIR)/*.code.tex)
+TEX_FILES_ALL_ = $(wildcard $(SOURCE_DIR)/*.tex)
+TIKZ_FILES_ALL  = $(filter-out $(TIKZ_LIBS), $(TEX_FILES_ALL_))
+TIKZ_LUALATEX = $(filter %.lualatex.tex, $(TIKZ_FILES_ALL))
+TIKZ_LATEX = $(filter-out  $(TIKZ_LUALATEX), $(TIKZ_FILES_ALL))
+PDF_LATEX = $(addprefix out/, $(addsuffix .pdf, $(basename  $(notdir $(TIKZ_LATEX) ))))
+OUTPUT_DIR = out
+# Detect operating system. Sort of tricky for Windows because of MSYS, cygwin, MGWIN
+OSFLAG :=
+ifeq ($(OS), Windows_NT)
+	OSFLAG = WINDOWS
+else
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S), Linux)
+		OSFLAG = LINUX
+	endif
+	ifeq ($(UNAME_S), Darwin)
+		OSFLAG = OSX
+	endif
+endif
+
+
+
+.PHONY: all
+all:  $(PDF_LATEX)
+
+
+# rules for .tex files to be compiled with pdflatex
+out/%.pdf:: src/%.tex msg_pdf_files
+	cd $(SOURCE_DIR) && \
+	pdflatex --interaction=batchmode -halt-on-error -output-directory ../$(OUTPUT_DIR) $(<F)  > /dev/null 2>&1; \
+	printf "`du -sh $@` <- \n"
+
+
+
+# one-time mesage
+.INTERMEDIATE: msg_pdf_files
+msg_pdf_files:
+	$(info generating pdf files)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# remove PNG and PDF files
+.PHONY: clean
+clean: tidy cleanlualatex cleansourcedir
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.png -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.pdf -delete
+
+
+
+# remove byproducts
+.PHONY: tidy
+tidy:
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.log -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.aux -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.out -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.gz -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.snm -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.toc -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.nav -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.fls -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.fdb_latexmk -delete
+
+.PHONY: cleanlualatex
+cleanlualatex: tidylualatex
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.lualatex.png -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.lualatex.pdf -delete
+
+
+.PHONY: tidylualatex
+tidylualatex:
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.lualatex.log -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.lualatex.aux -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.lualatex.out -delete
+	find $(OUTPUT_DIR) -maxdepth 1 -name \*.lualatex.synctex.gz -delete
+
+.PHONY: cleansourcedir
+cleansource:
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.png -delete
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.pdf -delete
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.log -delete
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.aux -delete
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.out -delete
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.gz -delete
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.snm -delete
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.toc -delete
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.nav -delete
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.fls -delete
+	find $(SOURCE_DIR) -maxdepth 1 -name \*.fdb_latexmk -delete
+
+
+
+# .PHONY: info
+# info:
+# 	@echo $(words $(TIKZ_LIBS))
+# 	@echo $(words $(TEX_FILES_ALL_))
+# 	@echo $(words $(TIKZ_FILES_ALL))
+# 	@echo $(words $(TIKZ_LATEX))
+# 	@echo $(words $(TIKZ_LATEX))
+# 	@echo $(words $(TIKZ_LUALATEX))
+# 	@echo $(TIKZ_LIBS)
+# 	@echo $(words $(PDF_LATEX))
+
+.PHONY: info
+info:
+	@echo $(words $(TIKZ_LIBS))
+	@echo $(words $(TIKZ_FILES_ALL_))
+	@echo $(words $(TIKZ_FILES_ALL))
+	@echo $(words $(TIKZ_LATEX))
+	@echo $(words $(TIKZ_LUALATEX))
+	@echo $(TIKZ_LIBS)
+
+
+.PHONY: getos
+getos:
+	@# Testing different ways of detecting the OS
+	@echo "OS is:" $(OSFLAG)
+	@# these two are equivalent
+	@echo "Number of words in OS env var:" $(words $(OS))
+	@echo count words in findstring $(words $(findstring $(OS),))
+	@if [  $(words $(OS)) -gt 0 ]; then echo "OS env word count it is greater than zero, means it is WINDOWS"; fi
+	@# Using if
+	@if [ "$(findstring $(OS), Windows_NT)" != "" ]; then echo "OS returns Windows_NT, not an empty string"; fi
+	@# using test
+	@if test $(findstring $(OS), Windows_NT) ; then echo "WINDOWS passed the test"; fi;
+	@if test $(findstring $(OSFLAG), WINDOWS); then echo "findstring of OSFLAG found WINDOWS"; fi
+	@if test $(OSFLAG) = WINDOWS; then echo "OSFLAG is WINDOWS"; fi
+	@if test $(findstring $(OSFLAG), OSX); then echo "it is a Mac"; fi
+	$(eval NUMWORDS = $(words $(findstring $(OS), Windows_NT)))
+	@echo NUMWORDS $(NUMWORDS)
+ifeq ($(strip $(findstring $(OS), Windows_NT) ),)
+	@echo "findstring found OS empty. No WINDOWS here"
+else
+	@echo "findstring found OS filled, so it is WINDOWS"
+endif
+
+
