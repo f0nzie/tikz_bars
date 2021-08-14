@@ -96,9 +96,9 @@ Some useful tutorials:
 
 ## Useful statistics
 
-* There are 32 total Tikz figures saved as `.tex` files in this gallery. 
+* There are 33 total Tikz figures saved as `.tex` files in this gallery. 
 The figures are sorted by filename.
-* There are 32 files under `src/` to be compiled with `pdflatex`
+* There are 33 files under `src/` to be compiled with `pdflatex`
 * There are 0 files under `src/` to be compiled with `lualatex`
 * There are 0 data files under the folder `src/data` that are being used by the TikZ scripts
 * There are 0 Latex classes, styles and library files under the `src/texmf` folder
@@ -971,6 +971,48 @@ Technical,		 1,		techinfra
     \addplot coordinates {(3,no) (7,yes)};
   \end{axis}
 \end{tikzpicture}
+\end{document}
+```
+****
+
+### [custom_labels.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/custom_labels.tex)
+
+![](./out/custom_labels.png)
+
+  
+
+
+```tex
+% Custom labels for each bar
+% https://tex.stackexchange.com/a/527972/173708
+\documentclass[tikz,border=5]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+
+\begin{document}
+%\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\edef\mylst{"An arbitrary string","String","Custom label","Not this data"}
+\begin{axis}[ymax=370,
+    ybar,
+    enlargelimits=0.15,
+    legend style={at={(0.5,-0.15)},
+    anchor=north,legend columns=-1},
+    ylabel={Speedup},
+    xlabel={\# of Model Elements (millions)},
+    symbolic x coords={1m,1.5m,2m,4m},
+    xtick=data,
+    nodes near coords style={font=\sffamily,align=center,text width=4em},
+    nodes near coords=\pgfmathsetmacro{\mystring}{{\mylst}[\coordindex]}\mystring,
+    nodes near coords align={vertical},
+    ]
+\addplot coordinates {(1m,92.021) (1.5m,235.809) (2m,276.824) (4m,340.847)};
+\end{axis}
+\end{tikzpicture}
+%\caption{Results}
+%\label{fig:mycaption}
+%\end{figure}
 \end{document}
 ```
 ****

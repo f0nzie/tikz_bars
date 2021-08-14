@@ -195,6 +195,21 @@ cat(readLines("./src/bars-2-yes-no.tex"), sep = "\n")
 `r b`
 ****
 
+### [custom_labels.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/custom_labels.tex)
+
+![](./out/custom_labels.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/custom_labels.tex"), sep = "\n")
+```
+`r b`
+****
+
 ### [dynamic-axis-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-axis-pgf.tex)
 
 ![](./out/dynamic-axis-pgf.png)
