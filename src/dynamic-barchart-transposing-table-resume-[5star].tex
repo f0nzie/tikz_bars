@@ -1,0 +1,118 @@
+% create bar chart from select table row(s) for select column
+% https://tex.stackexchange.com/a/355926/173708
+
+% used PGFPlots v1.14
+\documentclass[border=5pt]{standalone}
+\usepackage{pgfplots,pgfplotstable}
+    \pgfplotsset{
+        % use this `compat' level or higher to use the advanced features for
+        % axis label positioning
+        compat=1.13,
+    }
+    \pgfplotstableread[col sep=comma]{
+        Year,   A,      B,    C,   D,     E
+        2011, 14.80,  9.50, 2.27, 1.13, -0.15
+        2012, 15.80, 10.50, 2.57, 2.13, -0.25
+        2013, 16.80, 11.50, 2.67, 3.13, -0.50
+    }\datatable
+
+\pgfplotstableread[col sep=comma]{
+	item, realm, rating, width, color,    description  
+	1,   work,     10, 13em, accent!30, Sleeping \& dreaming about work
+	2,   investor, 25,  9em, accent!60, Public resolving issues with  investors
+	3,   family,   20, 11em, accent!40, Spending time with family
+	4,   work,      5,  8em, accent!20, Business development after acquisition
+	5,   work,     30,  9em, accent!50, Showing employees that their work has meaning
+}\projectstable
+
+
+    % do have a simple solution, transpose the data table
+    \pgfplotstabletranspose[
+        colnames from={Year},
+    ]{\transposeddatatable}{\datatable}
+    
+    % do have a simple solution, transpose the data table
+    \pgfplotstabletranspose[
+    colnames from={item},
+    ]{\transposedprojectstable}{\projectstable}
+
+    
+    % =========================================================================
+    % here you specify the year you want to plot
+    \pgfmathtruncatemacro{\Year}{2013}
+    % =========================================================================
+    % now we can extract the `ymax' value from the transposed table
+    \pgfplotstablegetelem{0}{\Year}\of{\transposeddatatable}
+        \pgfmathsetmacro{\ymax}{\pgfplotsretval}
+        
+\begin{document}
+	
+\begin{tikzpicture}
+%    \begin{axis}[
+%        x=1.5cm,
+%        ybar,
+%        bar width=25pt,
+%        bar shift=0pt,  % offset of the bar; could be negative
+%        ylabel=\Year,   % apply the stored value here for the chosen year
+%        ymin=-0.1,      
+%        ymax=\ymax,     % same here. supply the stored value for the `ymax' value
+%        enlarge x limits=0.2,
+%        %
+%        % instead of using `symbolic x coords' we do it a bit different,
+%        % because then we don't get into trouble "deleting"/skipping the "A"
+%        % value from the table, which should not be plotted here
+%        %
+%        % just use integers to a sufficiently high number so that all bars
+%        % will have a tick ...
+%        xtick=data,
+%        %
+%        % ... and use as labels the values from the transposed table
+%        xticklabels from table={\transposeddatatable}{colnames},
+%        %
+%        % to skip the "A" value filter it away
+%        % x filter/.expression={x==0 ? NaN : x},  % enable to filter column A
+%        %
+%        % this is used to filter the "negative" values away
+%        % (this also works for filtering the "positive" values away, since the
+%        %  filter is applied *after* `y expr' is evaluated, so the former
+%        %  former positive values are now negative and vice versa)
+%        % y filter/.expression={y<0 ? NaN : y},  % enable to filter negative values
+%        %
+%        nodes near coords,  % column labels on top of bars
+%        tick pos=left,      % y-axis on left of plot
+%    ]
+%    	% plot only one series, which is Year 2013
+%        \addplot [
+%            fill=blue!50,
+%        ] table [
+%            % we use `\coordindex' as x value, which now matches the `xtick's
+%            % and the corresponding labels
+%            x expr=\coordindex,
+%            %
+%            % of course here we want to simply the values from the corresponding
+%            % chosen year
+%            y=\Year,
+%        ] {\transposeddatatable};
+%
+%		% add a second layer on top of the first plot
+%        \addplot [
+%            fill=red!50,
+%        ] table [
+%            x expr=\coordindex,
+%            %
+%            % here we also want to use the values from the corresponding year,
+%            % but we want to plot the negative of that value why we use
+%            % `y expr' here and thus need `\thisrow'
+%            y expr=-\thisrow{\Year},
+%        ] {\transposeddatatable};
+%
+%    \end{axis}
+\end{tikzpicture}
+%
+%    % print tables for debugging purposes only
+%     \pgfplotstabletypeset[string type]{\transposeddatatable}  % print transposed table
+%     \pgfplotstabletypeset[string type]{\datatable}            % print original table
+
+     \pgfplotstabletypeset[string type]{\projectstable}            % print original table
+     \pgfplotstabletypeset[string type]{\transposedprojectstable}  % print transposed table     
+\end{document}

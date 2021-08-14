@@ -1,0 +1,37 @@
+% How to draw bar chart using tikz?
+% https://tex.stackexchange.com/questions/99832/how-to-draw-bar-chart-using-tikz
+
+% added new column "Color"
+
+\documentclass[border=5mm] {standalone}
+\usepackage{pgfplots, pgfplotstable}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+\pgfplotstableread{ % Read the data into a table macro
+Label   First   Second  Third Color
+10      0.1     0.3     0.3   RED
+20      0.2     0.3     0.3   BLUE
+30      0.3     0.4     0.5   GREEN
+40      0.3     0.5     0.8   YELLOW
+160     0.5     0.9     1.5   RED
+}\datatable
+
+\begin{axis}[
+    xbar stacked,   % Stacked horizontal bars
+    xmin=0,         % Start x axis at 0
+    ytick=data,     % Use as many tick labels as y coordinates
+%    yticklabels from table={\datatable}{Label}  % labels from the Label column in table
+    yticklabels from table={\datatable}{Color}
+]
+
+% "First" column or series against data index
+\addplot [fill=yellow] table [x=First, y expr=\coordindex] {\datatable};  
+\addplot [fill=green!70!blue]table [x=Second, y expr=\coordindex] {\datatable}; %2nd series
+\addplot [fill=red!80!yellow] table [x=Third, y expr=\coordindex] {\datatable}; %3rd series
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

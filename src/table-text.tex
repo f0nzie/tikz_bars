@@ -1,0 +1,25 @@
+% Setting “col sep = semicolon”
+% https://tex.stackexchange.com/questions/275673/setting-col-sep-semicolon
+
+\documentclass{standalone}
+
+\usepackage{pgfplotstable,booktabs}
+\newcolumntype{M}{>{$}c<{$}}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+	
+\pgfplotstabletypeset[
+	col sep = semicolon,
+	header=false,
+	string replace*={_}{\textsubscript},
+	every head row/.style={before row=\toprule,after row=\midrule},
+	every last row/.style={after row=\bottomrule},
+	display columns/0/.style={string type,column name={}},
+	display columns/2/.style={string type,column name={},column type={M}}
+]
+{
+	A-C-Pr;31;<1;27.3
+	F-C-Pr;31;<1;27.3
+}
+\end{document}

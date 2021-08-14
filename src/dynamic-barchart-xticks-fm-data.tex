@@ -1,0 +1,36 @@
+% specify the step of pgfplots axis
+% https://tex.stackexchange.com/questions/47345/specify-the-step-of-pgfplots-axis
+
+\documentclass{article}
+\usepackage{pgfplots}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{20pt}%         % gap around plot
+
+
+\begin{document}
+\pgfplotstableread{
+   	thread speedup dev
+    	1     1    0
+    	2     3    1
+    	3     5    0
+    	4     7    1
+}\datafile
+
+\begin{tikzpicture}
+	\begin{axis}[
+		ybar,
+	    xlabel=threads,
+	    ylabel=speedup \& deviation,
+	    xtick=data
+	    ]
+	    
+		% first layer
+		\addplot table[x=thread, y=speedup] {\datafile};
+		% 2nd layer
+		\addplot table[x=thread, y=dev] {\datafile};
+	\end{axis}
+\end{tikzpicture}
+\end{document}

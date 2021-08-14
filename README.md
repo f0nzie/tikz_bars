@@ -96,9 +96,9 @@ Some useful tutorials:
 
 ## Useful statistics
 
-* There are 18 total Tikz figures saved as `.tex` files in this gallery. 
+* There are 32 total Tikz figures saved as `.tex` files in this gallery. 
 The figures are sorted by filename.
-* There are 18 files under `src/` to be compiled with `pdflatex`
+* There are 32 files under `src/` to be compiled with `pdflatex`
 * There are 0 files under `src/` to be compiled with `lualatex`
 * There are 0 data files under the folder `src/data` that are being used by the TikZ scripts
 * There are 0 Latex classes, styles and library files under the `src/texmf` folder
@@ -1349,6 +1349,1149 @@ Technical,		 1,		techinfra
 	\end{axis} 
 \end{tikzpicture} 
 
+\end{document}
+```
+****
+
+### [dynamic-barchart-extract-color-fm-table-data-9000[5star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-extract-color-fm-table-data-9000[5star].tex)
+
+![](./out/dynamic-barchart-extract-color-fm-table-data-9000[5star].png)
+
+  
+
+
+```tex
+% Select color of a bar plot from table value
+% https://tex.stackexchange.com/questions/493962/select-color-of-a-bar-plot-from-table-value
+
+\documentclass{article}
+\usepackage{pgfplots, pgfplotstable}
+\pgfplotsset{compat=1.16}
+\usetikzlibrary{calc}
+\usepackage[utf8]{inputenc}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{20pt}%         % gap around plot
+
+\pgfkeys{/pgf/shapes/xbar/height/.initial=10cm,/pgf/shapes/xbar/width/.initial=6pt}
+
+\pgfdeclareplotmark{xbar}{%
+    \pgfpathrectangle{\pgfpoint{0pt}{-.5*\pgfkeysvalueof{/pgf/shapes/xbar/width}}{0pt}}{%
+    \pgfpoint{-\pgfkeysvalueof{/pgf/shapes/xbar/height}}{\pgfkeysvalueof{/pgf/shapes/xbar/width}}}
+    \pgfusepath{stroke,fill}}
+
+\begin{document}
+
+\pgfplotstableread[col sep=comma]{
+	label, startyear, endyear, color, years  
+	Washington, 1789, 1797, black!50, 8
+	Adams, 1797, 1801, red!30, 4
+	Jefferson, 1801, 1809, green!50, 8
+	Madison, 1801, 1809, brown!50, 8
+}\loadedtable
+
+% sort by startyear
+\pgfplotstablesort[sort key=startyear]\sortedtable\loadedtable
+
+\begin{tikzpicture}
+	\begin{axis}[
+%		xmin=1785, 
+%		xmax=1810, 
+		height=4cm,
+		/pgf/shapes/xbar/width=0.2cm,
+	  	axis lines=left,
+	  	width=\textwidth, 
+	  	enlarge y limits={abs=0.5},
+	  	ytick=\empty,
+	  	scatter/@pre marker code/.code={
+		  \pgfplotstablegetelem{\coordindex}{color}\of{\sortedtable}
+		  \edef\mycolor{\pgfplotsretval}
+		  \pgfplotstablegetelem{\coordindex}{startyear}\of{\sortedtable}
+		  \edef\startyear{\pgfplotsretval}
+		  \pgfplotstablegetelem{\coordindex}{endyear}\of{\sortedtable}
+		  \edef\endyear{\pgfplotsretval}
+		  \pgfplotstablegetelem{\coordindex}{years}\of{\sortedtable}
+			\edef\years{\pgfplotsretval}		  
+%		  \pgfmathsetmacro{\myheight}{(\endyear-\startyear)*\xunit} % height
+		  \pgfmathsetmacro{\myheight}{(\years)*\xunit} % height
+		  \scope[fill=\mycolor,/pgf/shapes/xbar/height=\myheight pt] },
+	  legend style={at={(1,1.5)}}
+	]
+	
+	\addplot [
+		xbar , 
+%		draw=none, 
+		forget plot] table [col sep=comma,x=startyear, y expr=-\coordindex]{\sortedtable};
+	\path let \p1=($(1786,0)-(1785,0)$) in \pgfextra{\xdef\xunit{\x1}}; % measure x unit
+	
+	\addplot[
+		only marks, 
+		scatter, 
+		mark=xbar,
+	   	nodes near coords*, 
+	   	forget plot,
+		nodes near coords align={anchor=west},
+		point meta=explicit symbolic, 
+		every node near coord/.append style={black}]  
+	 		table[
+	 			col sep=comma, 
+	 			y expr=-\coordindex, 
+	 			x expr=\thisrow{endyear}, 
+	 			meta=label]{\sortedtable};
+	 
+	 % create object NumRows that we will use in foreach
+	 \pgfplotstablegetrowsof{\sortedtable} 
+	 \pgfmathtruncatemacro{\NumRows}{\pgfplotsretval-1} 
+
+%		adds a colored legend	 
+%	 \pgfplotsinvokeforeach{0,...,\NumRows}{
+%		\pgfplotstablegetelem{#1}{color}\of{\sortedtable}
+%		\edef\mycolor{\pgfplotsretval}
+%		\pgfplotstablegetelem{#1}{label}\of{\sortedtable}
+%		\edef\mylabel{\pgfplotsretval}
+%		\edef\temp{\noexpand\addlegendimage{area legend,fill=\mycolor}
+%		\noexpand\addlegendentry{\mylabel}}
+%		\temp
+%	 }
+	\end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
+### [dynamic-barchart-extract-color-fm-table-data.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-extract-color-fm-table-data.tex)
+
+![](./out/dynamic-barchart-extract-color-fm-table-data.png)
+
+  
+
+
+```tex
+% Select color of a bar plot from table value
+% https://tex.stackexchange.com/questions/493962/select-color-of-a-bar-plot-from-table-value
+
+\documentclass{article}
+\usepackage{pgfplots, pgfplotstable}
+\pgfplotsset{compat=1.16}
+\usetikzlibrary{calc}
+\usepackage[utf8]{inputenc}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{20pt}%         % gap around plot
+
+\pgfkeys{/pgf/shapes/xbar/height/.initial=10cm,/pgf/shapes/xbar/width/.initial=6pt}
+
+\pgfdeclareplotmark{xbar}{%
+    \pgfpathrectangle{\pgfpoint{0pt}{-.5*\pgfkeysvalueof{/pgf/shapes/xbar/width}}{0pt}}{%
+    \pgfpoint{-\pgfkeysvalueof{/pgf/shapes/xbar/height}}{\pgfkeysvalueof{/pgf/shapes/xbar/width}}}
+    \pgfusepath{stroke,fill}}
+
+\begin{document}
+
+\pgfplotstableread[col sep=comma]{
+	label, startyear, endyear, color  
+	Washington, 1789, 1797, black!50
+	Adams, 1797, 1801, red!30
+	Jefferson, 1801, 1809, green!50
+	Madison, 1801, 1809, brown!50
+}\loadedtable
+
+% sort by startyear
+\pgfplotstablesort[sort key=startyear]\sortedtable\loadedtable
+
+\begin{tikzpicture}
+	\begin{axis}[
+		xmin=1785, 
+		xmax=1810, 
+		height=4cm,
+		/pgf/shapes/xbar/width=0.2cm,
+	  	axis lines=left,
+	  	width=\textwidth, 
+	  	enlarge y limits={abs=0.5},
+	  	ytick=\empty,
+	  	scatter/@pre marker code/.code={
+		  \pgfplotstablegetelem{\coordindex}{color}\of{\sortedtable}
+		  \edef\mycolor{\pgfplotsretval}
+		  \pgfplotstablegetelem{\coordindex}{startyear}\of{\sortedtable}
+		  \edef\startyear{\pgfplotsretval}
+		  \pgfplotstablegetelem{\coordindex}{endyear}\of{\sortedtable}
+		  \edef\endyear{\pgfplotsretval}
+		  \pgfmathsetmacro{\myheight}{(\endyear-\startyear)*\xunit} % height
+		  \scope[fill=\mycolor,/pgf/shapes/xbar/height=\myheight pt] },
+	  legend style={at={(1,1.5)}}
+	]
+	
+	\addplot [xbar stacked,draw=none, forget plot] table [col sep=comma,x=startyear, y expr=-\coordindex]{\sortedtable};
+	\path let \p1=($(1786,0)-(1785,0)$)    in \pgfextra{\xdef\xunit{\x1}}; % measure x unit
+	
+	\addplot[
+		only marks, 
+		scatter, 
+		mark=xbar,
+	   	nodes near coords*, 
+	   	forget plot,
+		nodes near coords align={anchor=west},
+		point meta=explicit symbolic, 
+		every node near coord/.append style={black}]  
+	 		table[
+	 			col sep=comma, 
+	 			y expr=-\coordindex, 
+	 			x expr=\thisrow{endyear}, 
+	 			meta=label]{\sortedtable};
+	 
+	 % create object NumRows that we will use in foreach
+	 \pgfplotstablegetrowsof{\sortedtable} 
+	 \pgfmathtruncatemacro{\NumRows}{\pgfplotsretval-1} 
+
+%		adds a colored legend	 
+%	 \pgfplotsinvokeforeach{0,...,\NumRows}{
+%		\pgfplotstablegetelem{#1}{color}\of{\sortedtable}
+%		\edef\mycolor{\pgfplotsretval}
+%		\pgfplotstablegetelem{#1}{label}\of{\sortedtable}
+%		\edef\mylabel{\pgfplotsretval}
+%		\edef\temp{\noexpand\addlegendimage{area legend,fill=\mycolor}
+%		\noexpand\addlegendentry{\mylabel}}
+%		\temp
+%	 }
+	\end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
+### [dynamic-barchart-from-table-pgf-9000.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-from-table-pgf-9000.tex)
+
+![](./out/dynamic-barchart-from-table-pgf-9000.png)
+
+  
+
+
+```tex
+% How to draw bar chart using tikz?
+% https://tex.stackexchange.com/questions/99832/how-to-draw-bar-chart-using-tikz
+
+% added new column "Color"
+
+\documentclass[border=5mm] {standalone}
+\usepackage{pgfplots, pgfplotstable}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+\pgfplotstableread{ % Read the data into a table macro
+Label   First   Second  Third Color
+10      0.1     0.3     0.3   RED
+20      0.2     0.3     0.3   BLUE
+30      0.3     0.4     0.5   GREEN
+40      0.3     0.5     0.8   YELLOW
+160     0.5     0.9     1.5   RED
+}\datatable
+
+\begin{axis}[
+    xbar stacked,   % Stacked horizontal bars
+    xmin=0,         % Start x axis at 0
+    ytick=data,     % Use as many tick labels as y coordinates
+%    yticklabels from table={\datatable}{Label}  % labels from the Label column in table
+    yticklabels from table={\datatable}{Color}
+]
+
+% "First" column or series against data index
+\addplot [fill=yellow] table [x=First, y expr=\coordindex] {\datatable};  
+\addplot [fill=green!70!blue]table [x=Second, y expr=\coordindex] {\datatable}; %2nd series
+\addplot [fill=red!80!yellow] table [x=Third, y expr=\coordindex] {\datatable}; %3rd series
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
+```
+****
+
+### [dynamic-barchart-from-table-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-from-table-pgf.tex)
+
+![](./out/dynamic-barchart-from-table-pgf.png)
+
+  
+
+
+```tex
+% How to draw bar chart using tikz?
+% https://tex.stackexchange.com/questions/99832/how-to-draw-bar-chart-using-tikz
+
+\documentclass[border=5mm] {standalone}
+\usepackage{pgfplots, pgfplotstable}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+\pgfplotstableread{ % Read the data into a table macro
+Label   First   Second  Third
+10      0.1     0.3     0.3
+20      0.2     0.3     0.3
+30      0.3     0.4     0.5
+40      0.3     0.5     0.8
+160     0.5     0.9     1.5
+}\datatable
+
+\begin{axis}[
+    xbar stacked,   % Stacked horizontal bars
+    xmin=0,         % Start x axis at 0
+    ytick=data,     % Use as many tick labels as y coordinates
+    yticklabels from table={\datatable}{Label}  % Get the labels from the Label column of the \datatable
+]
+\addplot [fill=yellow] table [x=First, y expr=\coordindex] {\datatable};    % Plot the "First" column against the data index
+\addplot [fill=green!70!blue]table [x=Second, y expr=\coordindex] {\datatable};
+\addplot [fill=red!80!yellow] table [x=Third, y expr=\coordindex] {\datatable};
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
+```
+****
+
+### [dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star].tex)
+
+![](./out/dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star].png)
+
+  
+
+
+```tex
+% different color for each bar
+% https://tex.stackexchange.com/questions/264007/histogram-different-color-for-each-bar?noredirect=1&lq=1
+
+% Since xtick=data places labels for the data on the first plot only, 
+% the first plot is left out of the loop to get all the labels:
+
+\documentclass[a4paper,twoside,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage{pgfplotstable}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{20pt}%         % gap around plot
+
+\definecolor{color1}{rgb}{0.98, 0.81, 0.69}
+\definecolor{color2}{rgb}{0.55, 0.71, 0.0}
+\definecolor{color3}{rgb}{1.0, 0.6, 0.4}
+\definecolor{color4}{rgb}{0.29, 0.59, 0.82}
+
+\pgfplotscreateplotcyclelist{mycolor}{
+{fill=color1!80, draw=color1},
+{fill=color2!80, draw=color2},
+{fill=color3!80, draw=color3},
+{fill=color4!80, draw=color4},
+}
+
+\pgfplotsset{
+    discard if/.style 2 args={
+        x filter/.code={
+            \ifdim\thisrow{#1} pt=#2pt
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    },
+    discard if not/.style 2 args={
+        x filter/.code={
+            \ifdim\thisrow{#1} pt=#2pt
+            \else
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    }
+}
+
+
+\begin{filecontents*}{coefficienti.dat}
+T       K       Q       Kf      n
+400     0.0463  32.9   5.78   0.321
+500     0.124   24.8   6.30   0.275
+600     0.115   24.6   6.30   0.261
+700     1.64    24.4   11.9   0.151
+\end{filecontents*}
+
+\pgfplotstableread{
+T       K       Q       Kf      n
+400     0.0463  32.9   5.78   0.321
+500     0.124   24.8   6.30   0.275
+600     0.115   24.6   6.30   0.261
+700     1.64    24.4   11.9   0.151
+}\datatable
+
+
+\begin{document}
+
+\begin{tikzpicture}
+    \begin{axis} [
+        ymin=0,
+        ybar=0, bar width=20, bar shift=0,
+        xtick={data},
+        ymajorgrids=true,
+        cycle list name=mycolor,
+        nodes near coords,
+        every node near coord/.append style = {
+            /pgf/number format/.cd,
+            fixed,
+            fixed zerofill,
+            precision=3
+        }]
+
+	% first complete plot to place the x-axis labels
+	\addplot+ table[x=T,y=K] {\datatable};
+	
+% THIS THROWING ERROR
+%	% the bars with different colors
+%	\pgfplotsinvokeforeach{500,600,700} {
+%		\addplot+ [discard if not={T}{#1}] table[x=T,y=K] {\datatable};
+%	}
+
+	\end{axis}
+\end{tikzpicture}
+
+%     \pgfplotstabletypeset[string type]{\datatable}            % print original table
+\end{document}
+```
+****
+
+### [dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star].tex)
+
+![](./out/dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star].png)
+
+  
+
+
+```tex
+% different color for each bar
+% https://tex.stackexchange.com/questions/264007/histogram-different-color-for-each-bar?noredirect=1&lq=1
+
+% Since xtick=data places labels for the data on the first plot only, 
+% the first plot is left out of the loop to get all the labels:
+
+\documentclass[a4paper,twoside,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage{pgfplotstable}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{20pt}%         % gap around plot
+
+\definecolor{color1}{rgb}{0.98, 0.81, 0.69}
+\definecolor{color2}{rgb}{0.55, 0.71, 0.0}
+\definecolor{color3}{rgb}{1.0, 0.6, 0.4}
+\definecolor{color4}{rgb}{0.29, 0.59, 0.82}
+
+\pgfplotscreateplotcyclelist{mycolor}{
+{fill=color1!80, draw=color1},
+{fill=color2!80, draw=color2},
+{fill=color3!80, draw=color3},
+{fill=color4!80, draw=color4},
+}
+
+\pgfplotsset{
+    discard if/.style 2 args={
+        x filter/.code={
+            \ifdim\thisrow{#1} pt=#2pt
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    },
+    discard if not/.style 2 args={
+        x filter/.code={
+            \ifdim\thisrow{#1} pt=#2pt
+            \else
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    }
+}
+
+
+\begin{filecontents*}{coefficienti.dat}
+T       K       Q       Kf      n
+400     0.0463  32.9   5.78   0.321
+500     0.124   24.8   6.30   0.275
+600     0.115   24.6   6.30   0.261
+700     1.64    24.4   11.9   0.151
+\end{filecontents*}
+
+\begin{document}
+
+\begin{tikzpicture}
+    \begin{axis} [
+        ymin=0,
+        ybar=0, bar width=20, bar shift=0,
+        xtick={data},
+        ymajorgrids=true,
+        cycle list name=mycolor,
+        nodes near coords,
+        every node near coord/.append style = {
+            /pgf/number format/.cd,
+            fixed,
+            fixed zerofill,
+            precision=3
+        }]
+
+	% first complete plot to place the x-axis labels
+	\addplot+ table[x=T,y=K] {coefficienti.dat};
+	
+	% the bars with different colors
+	\pgfplotsinvokeforeach{500,600,700} {        
+		\addplot+ [discard if not={T}{#1}] table[x=T,y=K] {coefficienti.dat};
+	}
+
+	\end{axis}
+\end{tikzpicture}
+
+\end{document}
+```
+****
+
+### [dynamic-barchart-read-xticklabels-fm-table-[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-read-xticklabels-fm-table-[4star].tex)
+
+![](./out/dynamic-barchart-read-xticklabels-fm-table-[4star].png)
+
+  
+
+
+```tex
+% Reading xticklabels from a csv
+% https://tex.stackexchange.com/questions/290322/reading-xticklabels-from-a-csv?rq=1
+
+% original table modified. some decimals out
+% comment ymin, ymax
+
+\documentclass{standalone}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+    \pgfplotsset{compat=1.13}
+\usepackage{filecontents}
+
+% (at least to my knowledge) it is _required_ to have balanced rows!
+% to do so just write `NaN' in each cell you don't need/have a value
+\begin{filecontents}{EvalSummaryIndiv.csv}
+	AgentTypesL, OriginalL, MergedL, DifferenceL,AgentTypesS,OriginalS,MergedS,DifferenceS
+	m_snc_03,    0.022848, 0.011350,  0.0114972,  {ms03},    0.022848, 0.022985, -0.000137
+	m_snc_47,    0.023735, 0.010186,  0.0135318,  {ms47},    0.023735, 0.023995, -0.000260
+	m_snc_811,   0.024401, 0.011037,  0.0133693,  {ms811},   0.024401, 0.024248,  0.000152
+	m_snc_1215,  0.023291, 0.026428, -0.0031928,  {ms333},       NaN,     NaN,    0.000200
+\end{filecontents}
+
+% read table
+\pgfplotstableread[
+    col sep=comma,
+        ]{EvalSummaryIndiv.csv}\datatable
+
+\begin{document}
+	
+\begin{tikzpicture}
+	\begin{axis}[
+	    ybar,
+%	    ymin=-0.0010,    % <-- changed; original value: -0.010
+%	    ymax=0.0010,     % <-- changed; original value:  0.010
+	    scaled ticks=false,
+	    xlabel={Agent categories},
+	    xtick=data,
+	    xticklabels from table={\datatable}{AgentTypesS},
+	    ylabel={Proportion of agents},
+%	    ytick={-0.05,-0.002,-0.0005,0,0.0005,0.002,0.05},
+	    yticklabel style={
+	        /pgf/number format/.cd,
+	            fixed,
+	%                fixed zerofill,
+	            precision=4,
+	        /tikz/.cd,
+	    },
+	    legend style={
+	        legend pos=north west,
+	        font=\small,
+	    },
+	    ymajorgrids=true,
+	    grid style=dashed,
+	]
+	    \addplot[
+	        color=black,
+	        fill=blue!60!white,
+	    ] table[
+	%         x=AgentTypesS,     % <-- this line caused an error
+	        % just use the row index of the `\datatable' as x value
+	        x expr=\coordindex,
+	        y index={7},       % column index starting at zero
+	    ] {\datatable};
+	    \legend{Difference between original and merged}
+	\end{axis}
+\end{tikzpicture}
+
+\end{document}
+```
+****
+
+### [dynamic-barchart-read-xticklabels-fm-table-resume-[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-read-xticklabels-fm-table-resume-[4star].tex)
+
+![](./out/dynamic-barchart-read-xticklabels-fm-table-resume-[4star].png)
+
+  
+
+
+```tex
+% Reading xticklabels from a csv
+% https://tex.stackexchange.com/questions/290322/reading-xticklabels-from-a-csv?rq=1
+
+% original table modified. some decimals out
+% comment ymin, ymax
+
+\documentclass{standalone}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+    \pgfplotsset{compat=1.13}
+\usepackage{filecontents}
+
+% (at least to my knowledge) it is _required_ to have balanced rows!
+% to do so just write `NaN' in each cell you don't need/have a value
+% column index starts at 0
+\begin{filecontents}{EvalSummaryIndiv.csv}
+	AgentTypesL, OriginalL, MergedL, DifferenceL,AgentTypesS,OriginalS,MergedS,DifferenceS
+	m_snc_03,    0.022848, 0.011350,  0.0114972,  {ms03},    0.022848, 0.022985, -0.000137
+	m_snc_47,    0.023735, 0.010186,  0.0135318,  {ms47},    0.023735, 0.023995, -0.000260
+	m_snc_811,   0.024401, 0.011037,  0.0133693,  {ms811},   0.024401, 0.024248,  0.000152
+	m_snc_1215,  0.023291, 0.026428, -0.0031928,  {ms333},       NaN,     NaN,    0.000200
+\end{filecontents}
+
+
+
+% read table
+\pgfplotstableread[
+    col sep=comma,
+        ]{EvalSummaryIndiv.csv}\datatable
+        
+\pgfplotstableread[col sep=comma]{
+	item, realm, rating, width, color,    description  
+	1,   work,     10, 13em, accent!30, Sleeping \& dreaming about work
+	2,   investor, 25,  9em, accent!60, Public resolving issues with  investors
+	3,   family,   20, 11em, accent!40, Spending time with family
+	4,   work,      5,  8em, accent!20, Business development after acquisition
+	5,   work,     30,  9em, accent!50, Showing employees that their work has meaning
+}\projectstable        
+
+\begin{document}
+	
+\begin{tikzpicture}
+	\begin{axis}[
+	    ybar,
+%	    ymin=-0.0010,    % <-- changed; original value: -0.010
+%	    ymax=0.0010,     % <-- changed; original value:  0.010
+	    scaled ticks=false,
+	    xlabel={Agent categories},
+	    xtick=data,
+	    xticklabels from table={\datatable}{AgentTypesS},
+	    ylabel={Proportion of agents},
+%	    ytick={-0.05,-0.002,-0.0005,0,0.0005,0.002,0.05},
+	    yticklabel style={
+	        /pgf/number format/.cd,
+	            fixed,
+	%                fixed zerofill,
+	            precision=4,
+	        /tikz/.cd,
+	    },
+	    legend style={
+	        legend pos=north west,
+	        font=\small,
+	    },
+	    ymajorgrids=true,
+	    grid style=dashed,
+	]
+	    \addplot[
+	        color=blue,
+	        fill=blue!50!white,
+	    ] table[
+	%         x=AgentTypesS,     % <-- this line caused an error
+	        % just use the row index of the `\datatable' as x value
+	        x expr=\coordindex,
+	        y index={7},       % column index starting at zero
+	    ] {\datatable};
+	    \legend{Difference between original and merged}
+	\end{axis}
+\end{tikzpicture}
+
+\end{document}
+```
+****
+
+### [dynamic-barchart-transposing-table-[5star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-transposing-table-[5star].tex)
+
+![](./out/dynamic-barchart-transposing-table-[5star].png)
+
+  
+
+
+```tex
+% create bar chart from select table row(s) for select column
+% https://tex.stackexchange.com/a/355926/173708
+
+% used PGFPlots v1.14
+\documentclass[border=5pt]{standalone}
+\usepackage{pgfplots,pgfplotstable}
+\pgfplotsset{
+	% use this `compat' level or higher to use the advanced features for
+	% axis label positioning
+	compat=1.3,
+}
+\pgfplotstableread[col sep=comma]{
+	Year,A,B,C,D,E
+	2011,14.80,9.50,2.27,1.13,-0.15
+	2012,15.80,10.50,2.57,2.13,-0.25
+	2013,16.80,11.50,2.67,3.13,-0.50
+}\datatable
+% do have a simple solution, transpose the data table
+\pgfplotstabletranspose[
+colnames from={Year},
+]{\transposeddatatable}{\datatable}
+% =========================================================================
+% here you specify the year you want to plot
+\pgfmathtruncatemacro{\Year}{2013}
+% =========================================================================
+% now we can extract the `ymax' value from the transposed table
+\pgfplotstablegetelem{0}{\Year}\of{\transposeddatatable}
+\pgfmathsetmacro{\ymax}{\pgfplotsretval}
+\begin{document}
+	\begin{tikzpicture}
+	\begin{axis}[
+	x=1.5cm,
+	ybar,
+	bar width=25pt,
+	bar shift=0pt,
+	% simply apply the stored value here for the chosen year
+	ylabel=\Year,
+	ymin=-0.1,
+	% the same here. Just supply the stored value for the `ymax' value
+	ymax=\ymax,
+	enlarge x limits=0.2,
+	% instead of using `symbolic x coords' we do it a bit different,
+	% because then we don't get into trouble "deleting"/skipping the "A"
+	% value from the table, which should not be plotted here
+	%
+	% just use integers to a sufficiently high number so that all bars
+	% will have a tick ...
+	xtick=data,
+	% ... and use as labels the values from the transposed table
+	xticklabels from table={\transposeddatatable}{colnames},
+	% to skip the "A" value filter it away
+	x filter/.expression={x==0 ? NaN : x},
+	% this is used to filter the "negative" values away
+	% (this also works for filtering the "positive" values away, since the
+	%  filter is applied *after* `y expr' is evaluated, so the former
+	%  former positive values are now negative and vice versa)
+	y filter/.expression={y<0 ? NaN : y},
+	nodes near coords,
+	tick pos=left,
+	]
+	\addplot [
+	fill=blue!50,
+	] table [
+	% we use `\coordindex' as x value, which now matches the `xtick's
+	% and the corresponding labels
+	x expr=\coordindex,
+	% of course here we want to simply the values from the corresponding
+	% chosen year
+	y=\Year,
+	] {\transposeddatatable};
+	
+	\addplot [
+	fill=red!50,
+	] table [
+	x expr=\coordindex,
+	% here we also want to use the values from the corresponding year,
+	% but we want to plot the negative of that value why we use
+	% `y expr' here and thus need `\thisrow'
+	y expr=-\thisrow{\Year},
+	] {\transposeddatatable};
+	
+	\end{axis}
+	\end{tikzpicture}
+	%
+	%    % for debugging purposes only
+	%    \pgfplotstabletypeset[string type]{\transposeddatatable}
+\end{document}
+```
+****
+
+### [dynamic-barchart-transposing-table-9000-[5star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-transposing-table-9000-[5star].tex)
+
+![](./out/dynamic-barchart-transposing-table-9000-[5star].png)
+
+  
+
+
+```tex
+% create bar chart from select table row(s) for select column
+% https://tex.stackexchange.com/a/355926/173708
+
+% used PGFPlots v1.14
+\documentclass[border=5pt]{standalone}
+\usepackage{pgfplots,pgfplotstable}
+    \pgfplotsset{
+        % use this `compat' level or higher to use the advanced features for
+        % axis label positioning
+        compat=1.13,
+    }
+    \pgfplotstableread[col sep=comma]{
+        Year,   A,      B,    C,   D,     E
+        2011, 14.80,  9.50, 2.27, 1.13, -0.15
+        2012, 15.80, 10.50, 2.57, 2.13, -0.25
+        2013, 16.80, 11.50, 2.67, 3.13, -0.50
+    }\datatable
+
+    % do have a simple solution, transpose the data table
+    \pgfplotstabletranspose[
+        colnames from={Year},
+    ]{\transposeddatatable}{\datatable}
+
+    
+    % =========================================================================
+    % here you specify the year you want to plot
+    \pgfmathtruncatemacro{\Year}{2013}
+    % =========================================================================
+    % now we can extract the `ymax' value from the transposed table
+    \pgfplotstablegetelem{0}{\Year}\of{\transposeddatatable}
+        \pgfmathsetmacro{\ymax}{\pgfplotsretval}
+        
+\begin{document}
+	
+\begin{tikzpicture}
+    \begin{axis}[
+        x=1.5cm,
+        ybar,
+        bar width=25pt,
+        bar shift=0pt,  % offset of the bar; could be negative
+        ylabel=\Year,   % apply the stored value here for the chosen year
+        ymin=-0.1,      
+        ymax=\ymax,     % same here. supply the stored value for the `ymax' value
+        enlarge x limits=0.2,
+        %
+        % instead of using `symbolic x coords' we do it a bit different,
+        % because then we don't get into trouble "deleting"/skipping the "A"
+        % value from the table, which should not be plotted here
+        %
+        % just use integers to a sufficiently high number so that all bars
+        % will have a tick ...
+        xtick=data,
+        %
+        % ... and use as labels the values from the transposed table
+        xticklabels from table={\transposeddatatable}{colnames},
+        %
+        % to skip the "A" value filter it away
+        % x filter/.expression={x==0 ? NaN : x},  % enable to filter column A
+        %
+        % this is used to filter the "negative" values away
+        % (this also works for filtering the "positive" values away, since the
+        %  filter is applied *after* `y expr' is evaluated, so the former
+        %  former positive values are now negative and vice versa)
+        % y filter/.expression={y<0 ? NaN : y},  % enable to filter negative values
+        %
+        nodes near coords,  % column labels on top of bars
+        tick pos=left,      % y-axis on left of plot
+    ]
+    	% plot only one series, which is Year 2013
+        \addplot [
+            fill=blue!50,
+        ] table [
+            % we use `\coordindex' as x value, which now matches the `xtick's
+            % and the corresponding labels
+            x expr=\coordindex,
+            %
+            % of course here we want to simply the values from the corresponding
+            % chosen year
+            y=\Year,
+        ] {\transposeddatatable};
+
+		% add a second layer on top of the first plot
+        \addplot [
+            fill=red!50,
+        ] table [
+            x expr=\coordindex,
+            %
+            % here we also want to use the values from the corresponding year,
+            % but we want to plot the negative of that value why we use
+            % `y expr' here and thus need `\thisrow'
+            y expr=-\thisrow{\Year},
+        ] {\transposeddatatable};
+
+    \end{axis}
+\end{tikzpicture}
+%
+%    % print tables for debugging purposes only
+    % \pgfplotstabletypeset[string type]{\transposeddatatable}  % print transposed table
+    % \pgfplotstabletypeset[string type]{\datatable}            % print original table
+\end{document}
+```
+****
+
+### [dynamic-barchart-transposing-table-resume-[5star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-transposing-table-resume-[5star].tex)
+
+![](./out/dynamic-barchart-transposing-table-resume-[5star].png)
+
+  
+
+
+```tex
+% create bar chart from select table row(s) for select column
+% https://tex.stackexchange.com/a/355926/173708
+
+% used PGFPlots v1.14
+\documentclass[border=5pt]{standalone}
+\usepackage{pgfplots,pgfplotstable}
+    \pgfplotsset{
+        % use this `compat' level or higher to use the advanced features for
+        % axis label positioning
+        compat=1.13,
+    }
+    \pgfplotstableread[col sep=comma]{
+        Year,   A,      B,    C,   D,     E
+        2011, 14.80,  9.50, 2.27, 1.13, -0.15
+        2012, 15.80, 10.50, 2.57, 2.13, -0.25
+        2013, 16.80, 11.50, 2.67, 3.13, -0.50
+    }\datatable
+
+\pgfplotstableread[col sep=comma]{
+	item, realm, rating, width, color,    description  
+	1,   work,     10, 13em, accent!30, Sleeping \& dreaming about work
+	2,   investor, 25,  9em, accent!60, Public resolving issues with  investors
+	3,   family,   20, 11em, accent!40, Spending time with family
+	4,   work,      5,  8em, accent!20, Business development after acquisition
+	5,   work,     30,  9em, accent!50, Showing employees that their work has meaning
+}\projectstable
+
+    % do have a simple solution, transpose the data table
+    \pgfplotstabletranspose[
+        colnames from={Year},
+    ]{\transposeddatatable}{\datatable}
+    
+    % do have a simple solution, transpose the data table
+    \pgfplotstabletranspose[
+    colnames from={item},
+    ]{\transposedprojectstable}{\projectstable}
+
+    
+    % =========================================================================
+    % here you specify the year you want to plot
+    \pgfmathtruncatemacro{\Year}{2013}
+    % =========================================================================
+    % now we can extract the `ymax' value from the transposed table
+    \pgfplotstablegetelem{0}{\Year}\of{\transposeddatatable}
+        \pgfmathsetmacro{\ymax}{\pgfplotsretval}
+        
+\begin{document}
+	
+\begin{tikzpicture}
+%    \begin{axis}[
+%        x=1.5cm,
+%        ybar,
+%        bar width=25pt,
+%        bar shift=0pt,  % offset of the bar; could be negative
+%        ylabel=\Year,   % apply the stored value here for the chosen year
+%        ymin=-0.1,      
+%        ymax=\ymax,     % same here. supply the stored value for the `ymax' value
+%        enlarge x limits=0.2,
+%        %
+%        % instead of using `symbolic x coords' we do it a bit different,
+%        % because then we don't get into trouble "deleting"/skipping the "A"
+%        % value from the table, which should not be plotted here
+%        %
+%        % just use integers to a sufficiently high number so that all bars
+%        % will have a tick ...
+%        xtick=data,
+%        %
+%        % ... and use as labels the values from the transposed table
+%        xticklabels from table={\transposeddatatable}{colnames},
+%        %
+%        % to skip the "A" value filter it away
+%        % x filter/.expression={x==0 ? NaN : x},  % enable to filter column A
+%        %
+%        % this is used to filter the "negative" values away
+%        % (this also works for filtering the "positive" values away, since the
+%        %  filter is applied *after* `y expr' is evaluated, so the former
+%        %  former positive values are now negative and vice versa)
+%        % y filter/.expression={y<0 ? NaN : y},  % enable to filter negative values
+%        %
+%        nodes near coords,  % column labels on top of bars
+%        tick pos=left,      % y-axis on left of plot
+%    ]
+%    	% plot only one series, which is Year 2013
+%        \addplot [
+%            fill=blue!50,
+%        ] table [
+%            % we use `\coordindex' as x value, which now matches the `xtick's
+%            % and the corresponding labels
+%            x expr=\coordindex,
+%            %
+%            % of course here we want to simply the values from the corresponding
+%            % chosen year
+%            y=\Year,
+%        ] {\transposeddatatable};
+%
+%		% add a second layer on top of the first plot
+%        \addplot [
+%            fill=red!50,
+%        ] table [
+%            x expr=\coordindex,
+%            %
+%            % here we also want to use the values from the corresponding year,
+%            % but we want to plot the negative of that value why we use
+%            % `y expr' here and thus need `\thisrow'
+%            y expr=-\thisrow{\Year},
+%        ] {\transposeddatatable};
+%
+%    \end{axis}
+\end{tikzpicture}
+%
+%    % print tables for debugging purposes only
+%     \pgfplotstabletypeset[string type]{\transposeddatatable}  % print transposed table
+%     \pgfplotstabletypeset[string type]{\datatable}            % print original table
+
+     \pgfplotstabletypeset[string type]{\projectstable}            % print original table
+     \pgfplotstabletypeset[string type]{\transposedprojectstable}  % print transposed table     
+\end{document}
+```
+****
+
+### [dynamic-barchart-xticks-fm-data.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-xticks-fm-data.tex)
+
+![](./out/dynamic-barchart-xticks-fm-data.png)
+
+  
+
+
+```tex
+% specify the step of pgfplots axis
+% https://tex.stackexchange.com/questions/47345/specify-the-step-of-pgfplots-axis
+
+\documentclass{article}
+\usepackage{pgfplots}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{20pt}%         % gap around plot
+
+
+\begin{document}
+\pgfplotstableread{
+   	thread speedup dev
+    	1     1    0
+    	2     3    1
+    	3     5    0
+    	4     7    1
+}\datafile
+
+\begin{tikzpicture}
+	\begin{axis}[
+		ybar,
+	    xlabel=threads,
+	    ylabel=speedup \& deviation,
+	    xtick=data
+	    ]
+	    
+		% first layer
+		\addplot table[x=thread, y=speedup] {\datafile};
+		% 2nd layer
+		\addplot table[x=thread, y=dev] {\datafile};
+	\end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
+### [dynamic-linechart-read-from-table-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-linechart-read-from-table-pgf.tex)
+
+![](./out/dynamic-linechart-read-from-table-pgf.png)
+
+  
+
+
+```tex
+% Graph from csv table (col sep=comma) with pgfplotsinvokeforeach
+% https://tex.stackexchange.com/questions/448514/graph-from-csv-table-col-sep-comma-with-pgfplotsinvokeforeach
+
+% used PGFPlots v1.16
+\documentclass[border=5pt]{standalone}
+\usepackage{pgfplots}
+\usepackage{filecontents}
+
+% input and save data to file
+\begin{filecontents}{testdata.dat}
+    ,Distance,Velocity,Something
+    0,0,1,0.2
+    1,1,1,0.3
+    1.5,1.999,1,0.4
+    2,2,0,0.4
+    3,2,0,0.5
+\end{filecontents}
+
+\newcommand{\plotfile}[1]{
+    \pgfplotstableread[col sep=comma]{#1}{\table}
+    \pgfplotstablegetcolsof{\table}
+    \pgfmathtruncatemacro\numberofcols{\pgfplotsretval-1}
+    \pgfplotsinvokeforeach{1,...,\numberofcols}{  % iterate through columns
+        \pgfplotstablegetcolumnnamebyindex{##1}\of{\table}\to{\colname}  % arrange
+        \addplot table [y index=##1] {\table};
+        \addlegendentryexpanded{\colname}
+    }
+}
+\begin{document}
+	
+\begin{tikzpicture}
+    \begin{axis}
+        \plotfile{testdata.dat}
+    \end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
+### [table-text.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/table-text.tex)
+
+![](./out/table-text.png)
+
+  
+
+
+```tex
+% Setting “col sep = semicolon”
+% https://tex.stackexchange.com/questions/275673/setting-col-sep-semicolon
+
+\documentclass{standalone}
+
+\usepackage{pgfplotstable,booktabs}
+\newcolumntype{M}{>{$}c<{$}}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+	
+\pgfplotstabletypeset[
+	col sep = semicolon,
+	header=false,
+	string replace*={_}{\textsubscript},
+	every head row/.style={before row=\toprule,after row=\midrule},
+	every last row/.style={after row=\bottomrule},
+	display columns/0/.style={string type,column name={}},
+	display columns/2/.style={string type,column name={},column type={M}}
+]
+{
+	A-C-Pr;31;<1;27.3
+	F-C-Pr;31;<1;27.3
+}
 \end{document}
 ```
 

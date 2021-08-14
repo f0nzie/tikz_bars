@@ -1,0 +1,36 @@
+% Graph from csv table (col sep=comma) with pgfplotsinvokeforeach
+% https://tex.stackexchange.com/questions/448514/graph-from-csv-table-col-sep-comma-with-pgfplotsinvokeforeach
+
+% used PGFPlots v1.16
+\documentclass[border=5pt]{standalone}
+\usepackage{pgfplots}
+\usepackage{filecontents}
+
+% input and save data to file
+\begin{filecontents}{testdata.dat}
+    ,Distance,Velocity,Something
+    0,0,1,0.2
+    1,1,1,0.3
+    1.5,1.999,1,0.4
+    2,2,0,0.4
+    3,2,0,0.5
+\end{filecontents}
+
+\newcommand{\plotfile}[1]{
+    \pgfplotstableread[col sep=comma]{#1}{\table}
+    \pgfplotstablegetcolsof{\table}
+    \pgfmathtruncatemacro\numberofcols{\pgfplotsretval-1}
+    \pgfplotsinvokeforeach{1,...,\numberofcols}{  % iterate through columns
+        \pgfplotstablegetcolumnnamebyindex{##1}\of{\table}\to{\colname}  % arrange
+        \addplot table [y index=##1] {\table};
+        \addlegendentryexpanded{\colname}
+    }
+}
+\begin{document}
+	
+\begin{tikzpicture}
+    \begin{axis}
+        \plotfile{testdata.dat}
+    \end{axis}
+\end{tikzpicture}
+\end{document}
