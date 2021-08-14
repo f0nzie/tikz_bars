@@ -1,0 +1,59 @@
+% Vertical bar chart with different colors for each bar [duplicate]
+% https://tex.stackexchange.com/questions/381213/vertical-bar-chart-with-different-colors-for-each-bar?noredirect=1&lq=1
+
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{tikz}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{10pt}%         % gap around plot
+
+
+\definecolor{hous}{HTML}{b88b4d}
+\definecolor{green}{HTML}{79c561}
+\definecolor{farming}{HTML}{ded94c}
+\definecolor{trans}{HTML}{b4b4a9}
+\definecolor{services}{HTML}{ff362e}
+\definecolor{other}{HTML}{dbd4d3}
+\definecolor{industry}{HTML}{db79c0}
+\definecolor{water}{HTML}{7982db}
+\definecolor{techinfra}{HTML}{303355}
+
+\begin{document}
+	
+\begin{center}
+	\begin{figure} 
+		\label{landuse}
+		\begin{tikzpicture}
+		\begin{axis}[
+			ybar=-1cm,
+			axis x line*=bottom,
+			axis y line*=left,
+			height=8cm, width=\textwidth,
+			bar width=1cm,
+			ylabel={Share of land use in [\%]},
+			symbolic x coords={Housing,Urban green,Farmlands,Transport infrastructure,Services,Other,Industrial,Water bodies,Technical infrastructure},
+			x tick label style={rotate=45, anchor=east, align=left},
+			nodes near coords,
+			nodes near coords align={vertical}          
+			]
+			
+			\addplot[hous,fill] coordinates {(Housing,28)};
+			\addplot[green,fill] coordinates {(Urban green,28)};
+			\addplot[farming,fill] coordinates {(Farmlands,12)};
+			\addplot[trans,fill] coordinates {(Transport infrastructure,10)};
+			\addplot[services,fill] coordinates {(Services,7)};
+			\addplot[other,fill] coordinates {(Other,6)};
+			\addplot[industry,fill] coordinates {(Industrial,5)};
+			\addplot[water,fill] coordinates {(Water bodies,3)};
+			\addplot[techinfra,fill] coordinates {(Technical infrastructure,1)};            
+		\end{axis}
+		\end{tikzpicture}   
+	\end{figure}
+\end{center}
+
+
+\end{document}

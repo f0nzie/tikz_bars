@@ -96,9 +96,9 @@ Some useful tutorials:
 
 ## Useful statistics
 
-* There are 11 total Tikz figures saved as `.tex` files in this gallery. 
+* There are 18 total Tikz figures saved as `.tex` files in this gallery. 
 The figures are sorted by filename.
-* There are 11 files under `src/` to be compiled with `pdflatex`
+* There are 18 files under `src/` to be compiled with `pdflatex`
 * There are 0 files under `src/` to be compiled with `lualatex`
 * There are 0 data files under the folder `src/data` that are being used by the TikZ scripts
 * There are 0 Latex classes, styles and library files under the `src/texmf` folder
@@ -212,6 +212,147 @@ The figures are sorted by filename.
 ```
 ****
 
+### [bar-multicolor-9000.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-9000.tex)
+
+![](./out/bar-multicolor-9000.png)
+
+  
+
+
+```tex
+% 9000: call as a function
+% https://www.latex4technics.com/?note=U130YI
+% https://tex.stackexchange.com/a/370552/173708
+\documentclass[a4paper, 12pt]{article}
+\usepackage[paperwidth=5in, paperheight=3.2in]{geometry}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=newest}
+\geometry{left=0mm, right=3mm,top=6mm, bottom=3mm,}
+
+\definecolor{mygr}{HTML}{e6e6e6}
+
+\begin{document}
+
+% \newcount\ga
+% \ga=1 %
+
+% param 1: y-max
+\newcommand{\barchart}[2]{%
+\begin{figure}[!t]
+  \centering
+
+  % Calculate total
+  \newcounter{nodenumber}
+  \pgfmathsetmacro{\cumnum}{0}
+  \pgfmathsetmacro{\totalnum}{0}%
+  \foreach \value/\width/\colour/\name [count=\i] in {#2} {%
+    % \pgfmathsetmacro{\newcumnum}{\cumnum + 1}
+      \pgfmathparse{\value+\totalnum}%
+      \stepcounter{nodenumber}
+      \global\let\totalnum=\pgfmathresult%
+      \global\let\cumnum=\i
+      %  \i, \value, \width, \colour, \name, {\arabic{nodenumber}}. \par
+  }%  
+  Totalnum: \totalnum, \cumnum
+
+  \gdef\xticks{}
+  \foreach \i in {1,2,3,4,5} {
+    \xdef\xticks{\xticks \i}
+  }
+  % \xdef\xticks{\xticks 2}
+  \xticks
+
+  \begin{tikzpicture}
+    \begin{axis}[
+        /pgf/number format/1000 sep={},
+        width=3.8in,
+        height=1.8in,
+        at={(0.758in,0.981in)},
+        scale only axis,
+        clip=false,
+        separate axis lines,
+        axis on top,
+        xmin=0,
+        xmax=\cumnum+1,
+        xtick={1,2,3,4,5},
+        % xtick=\xticks,
+        % xtick={\foreach \value [count=\i] in {#2} {\i}},
+        x tick style={draw=none},
+        xticklabels={GREEN,BLUE,GREY,RED, BLUE},
+        % xticklabels={\foreach \value/\width/\colour/\name in {#2} {\colour;\\}},
+        ytick={0, 5, 10, 20},
+        ymin=0,
+        ymax=#1,
+        ylabel={YYY},
+        ymajorgrids,
+        every axis plot/.append style={
+          ybar,
+          bar width=.2,
+          bar shift=0pt,
+          fill
+        }
+      ]
+
+      % \newcount\ga
+      % \ga=1 %
+      % \addplot[green]coordinates {(\ga,6)};
+      % \advance\ga by1;
+      % \addplot[blue]coordinates{(\ga,11)};
+      % \advance\ga by1;
+      % \addplot[mygr]coordinates{(\ga,12)};
+      % \advance\ga by1;
+      % \addplot[red]coordinates{(\ga,18)};
+
+    \foreach \value / \width / \colour / \name [count=\i] in {#2} {%
+      \edef\temp{%
+        \noexpand\addplot[\colour]coordinates{(\i, \value)};
+      }
+      \temp;
+    }%
+
+      
+    \end{axis}
+
+  \end{tikzpicture}
+\end{figure}
+}
+
+% \barchart{2500}
+
+% \barchart{2500}{%
+%   10/13em/accent!30/Sleeping \& dreaming about work,
+%   25/9em/accent!60/resolving issues with investors,
+%   20/11em/accent!40/Spending time with family,
+%   5/8em/accent!70/Baking cupcakes
+% }
+
+\barchart{30}{%
+  10/13em/green/Sleeping dreaming about work,
+  25/9em/blue/resolving issues with investors,
+  20/11em/mygr/Spending time with family,
+  5/8em/red/Baking cupcakes,
+  15/13em/blue/Sleeping
+}
+
+% \foreach \x [count = \xi from 1] in {a,...,c,f,...,z}
+%   \xi, $\x$;
+
+% \newcounter{ga}\setcounter{ga}{0}
+% \foreach \t in {1,...,10}{\stepcounter{ga}}
+%   \thega
+
+% % return elements in alist
+% \gdef\alist{}
+% \foreach \i in {1,2,3,4} {
+%  \xdef\alist{\alist \i,}
+% }
+% \alist
+
+\end{document}
+```
+****
+
 ### [bar-multicolor-grids.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-grids.tex)
 
 ![](./out/bar-multicolor-grids.png)
@@ -275,6 +416,322 @@ The figures are sorted by filename.
 ```
 ****
 
+### [bar-multicolor-multiseries-center-figure-9000[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-multiseries-center-figure-9000[4star].tex)
+
+![](./out/bar-multicolor-multiseries-center-figure-9000[4star].png)
+
+  
+
+
+```tex
+% Vertical bar chart with different colors for each bar [duplicate]
+% https://tex.stackexchange.com/questions/381213/vertical-bar-chart-with-different-colors-for-each-bar?noredirect=1&lq=1
+
+% CHANGES
+% add table
+
+\documentclass{article}
+
+
+\usepackage{xcolor}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{10pt}%         % gap around plot
+
+
+\definecolor{hous}{HTML}{b88b4d}
+\definecolor{green}{HTML}{79c561}
+\definecolor{farming}{HTML}{ded94c}
+\definecolor{trans}{HTML}{b4b4a9}
+\definecolor{services}{HTML}{ff362e}
+\definecolor{other}{HTML}{dbd4d3}
+\definecolor{industry}{HTML}{db79c0}
+\definecolor{water}{HTML}{7982db}
+\definecolor{techinfra}{HTML}{303355}
+
+\pgfkeys{/pgf/shapes/ybar/height/.initial=10cm,/pgf/shapes/ybar/width/.initial=6pt}
+
+\pgfdeclareplotmark{ybar}{%
+	\pgfpathrectangle{\pgfpoint{0pt}{-.5*\pgfkeysvalueof{/pgf/shapes/ybar/width}}{0pt}}{%
+		\pgfpoint{-\pgfkeysvalueof{/pgf/shapes/ybar/height}}{\pgfkeysvalueof{/pgf/shapes/ybar/width}}}
+	\pgfusepath{stroke,fill}}
+
+\begin{document}
+	
+\pgfplotstableread[col sep=comma]{
+Category, 	 	Value,  Color
+Housing,   	  	28,	  	hous
+Urban green,	28, 	green
+Farmlands,		12, 	farming
+Transportation, 10, 	trans
+Services,		 7, 	services
+Other,			 6,		other
+Industrial,		 5,		industry
+Water bodies,	 3,		water
+Technical,		 1,		techinfra
+}\datatable	
+	
+\begin{center}
+	\begin{figure} 
+		\label{landuse}
+		\begin{tikzpicture}
+		\begin{axis}[
+			ybar=-1cm,
+			axis x line*=bottom,
+			axis y line*=left,
+			height=8cm, 
+			width=\textwidth,
+			bar width=1cm,
+			/pgf/shapes/ybar/width=0.2cm,
+			ylabel={Share of land use in [\%]},
+			symbolic x coords={Housing,Urban green,Farmlands,Transportation,Services,Other,Industrial,Water bodies,Technical},
+			x tick label style={rotate=45, anchor=east, align=left},
+			nodes near coords,
+			nodes near coords align={vertical},
+			scatter/@pre marker code/.code={
+				\pgfplotstablegetelem{\coordindex}{Color}\of{\datatable}
+				\edef\mycolor{\pgfplotsretval}
+				\pgfplotstablegetelem{\coordindex}{Value}\of{\datatable}
+				\edef\myvalue{\pgfplotsretval}
+				\pgfmathsetmacro{\myheight}{(\myvalue)}
+%				\scope[fill=\mycolor,/pgf/shapes/ybar/height=\myheight pt] 
+			},
+			]
+
+			
+%%			\addplot+[hous,fill] table[x=Category,y=Value] {\datatable};
+			\addplot+ table[x=Category,y=Value] {\datatable};	
+
+		 \pgfplotstablegetrowsof{\datatable} 
+		\pgfmathtruncatemacro{\NumRows}{\pgfplotsretval-1} 
+			
+		 \pgfplotsinvokeforeach{0,...,\NumRows}{
+		 	\pgfplotstablegetelem{#1}{Color}\of{\datatable}
+		 	\edef\mycolor{\pgfplotsretval}
+		 	\pgfplotstablegetelem{#1}{Category}\of{\datatable}
+		 	\edef\mylabel{\pgfplotsretval}
+		 	\edef\temp{\noexpand\addlegendimage{area legend,fill=\mycolor}
+		 		\noexpand\addlegendentry{\mylabel}}
+		 	\temp
+		 }		
+			
+			
+%			\addplot[hous,fill] coordinates {(Housing,28)};
+%			\addplot[green,fill] coordinates {(Urban green,28)};
+%			\addplot[farming,fill] coordinates {(Farmlands,12)};
+%			\addplot[trans,fill] coordinates {(Transportation,10)};
+%			\addplot[services,fill] coordinates {(Services,7)};
+%			\addplot[other,fill] coordinates {(Other,6)};
+%			\addplot[industry,fill] coordinates {(Industrial,5)};
+%			\addplot[water,fill] coordinates {(Water bodies,3)};
+%			\addplot[techinfra,fill] coordinates {(Technical,1)};  
+			          
+		\end{axis}
+		\end{tikzpicture}   
+	\end{figure}
+\end{center}
+
+     \pgfplotstabletypeset[string type]{\datatable}            % print original table
+\end{document}
+```
+****
+
+### [bar-multicolor-multiseries-center-figure.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-multiseries-center-figure.tex)
+
+![](./out/bar-multicolor-multiseries-center-figure.png)
+
+  
+
+
+```tex
+% Vertical bar chart with different colors for each bar [duplicate]
+% https://tex.stackexchange.com/questions/381213/vertical-bar-chart-with-different-colors-for-each-bar?noredirect=1&lq=1
+
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{tikz}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{10pt}%         % gap around plot
+
+\definecolor{hous}{HTML}{b88b4d}
+\definecolor{green}{HTML}{79c561}
+\definecolor{farming}{HTML}{ded94c}
+\definecolor{trans}{HTML}{b4b4a9}
+\definecolor{services}{HTML}{ff362e}
+\definecolor{other}{HTML}{dbd4d3}
+\definecolor{industry}{HTML}{db79c0}
+\definecolor{water}{HTML}{7982db}
+\definecolor{techinfra}{HTML}{303355}
+
+\begin{document}
+	
+\begin{center}
+	\begin{figure} 
+		\label{landuse}
+		\begin{tikzpicture}
+		\begin{axis}[
+			ybar=-1cm,
+			axis x line*=bottom,
+			axis y line*=left,
+			height=8cm, width=\textwidth,
+			bar width=1cm,
+			ylabel={Share of land use in [\%]},
+			symbolic x coords={Housing,Urban green,Farmlands,Transport infrastructure,Services,Other,Industrial,Water bodies,Technical infrastructure},
+			x tick label style={rotate=45, anchor=east, align=left},
+			nodes near coords,
+			nodes near coords align={vertical}          
+			]
+			
+			\addplot[hous,fill] coordinates {(Housing,28)};
+			\addplot[green,fill] coordinates {(Urban green,28)};
+			\addplot[farming,fill] coordinates {(Farmlands,12)};
+			\addplot[trans,fill] coordinates {(Transport infrastructure,10)};
+			\addplot[services,fill] coordinates {(Services,7)};
+			\addplot[other,fill] coordinates {(Other,6)};
+			\addplot[industry,fill] coordinates {(Industrial,5)};
+			\addplot[water,fill] coordinates {(Water bodies,3)};
+			\addplot[techinfra,fill] coordinates {(Technical infrastructure,1)};            
+		\end{axis}
+		\end{tikzpicture}   
+	\end{figure}
+\end{center}
+
+
+\end{document}
+```
+****
+
+### [bar-multicolor-multiseries-center-figure[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-multiseries-center-figure[4star].tex)
+
+![](./out/bar-multicolor-multiseries-center-figure[4star].png)
+
+  
+
+
+```tex
+% Vertical bar chart with different colors for each bar [duplicate]
+% https://tex.stackexchange.com/questions/381213/vertical-bar-chart-with-different-colors-for-each-bar?noredirect=1&lq=1
+
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{tikz}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{10pt}%         % gap around plot
+
+
+\definecolor{hous}{HTML}{b88b4d}
+\definecolor{green}{HTML}{79c561}
+\definecolor{farming}{HTML}{ded94c}
+\definecolor{trans}{HTML}{b4b4a9}
+\definecolor{services}{HTML}{ff362e}
+\definecolor{other}{HTML}{dbd4d3}
+\definecolor{industry}{HTML}{db79c0}
+\definecolor{water}{HTML}{7982db}
+\definecolor{techinfra}{HTML}{303355}
+
+\begin{document}
+	
+\begin{center}
+	\begin{figure} 
+		\label{landuse}
+		\begin{tikzpicture}
+		\begin{axis}[
+			ybar=-1cm,
+			axis x line*=bottom,
+			axis y line*=left,
+			height=8cm, width=\textwidth,
+			bar width=1cm,
+			ylabel={Share of land use in [\%]},
+			symbolic x coords={Housing,Urban green,Farmlands,Transport infrastructure,Services,Other,Industrial,Water bodies,Technical infrastructure},
+			x tick label style={rotate=45, anchor=east, align=left},
+			nodes near coords,
+			nodes near coords align={vertical}          
+			]
+			
+			\addplot[hous,fill] coordinates {(Housing,28)};
+			\addplot[green,fill] coordinates {(Urban green,28)};
+			\addplot[farming,fill] coordinates {(Farmlands,12)};
+			\addplot[trans,fill] coordinates {(Transport infrastructure,10)};
+			\addplot[services,fill] coordinates {(Services,7)};
+			\addplot[other,fill] coordinates {(Other,6)};
+			\addplot[industry,fill] coordinates {(Industrial,5)};
+			\addplot[water,fill] coordinates {(Water bodies,3)};
+			\addplot[techinfra,fill] coordinates {(Technical infrastructure,1)};            
+		\end{axis}
+		\end{tikzpicture}   
+	\end{figure}
+\end{center}
+
+
+\end{document}
+```
+****
+
+### [bar-multicolor-multiseries.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-multiseries.tex)
+
+![](./out/bar-multicolor-multiseries.png)
+
+  
+
+
+```tex
+\documentclass{standalone}
+\usepackage{pgfplotstable}
+\pgfplotstableread[col sep=comma]{
+	Year, Facebook, Instagram, Snapchat, WhatsApp
+	2008, 17, 0,0,0
+	2009,69,0,0,0
+	2010,197,0,0,0
+	2011,249,9,0,0
+	2012,300,9,51,0
+	2013,343,51,394,394
+	2014,351,60,703,703
+	}\mytable
+
+\definecolor{blueaccent}{RGB}{0,150,214}
+\definecolor{greenaccent}{RGB}{0,139,43}
+\definecolor{purpleaccent}{RGB}{130,41,128}
+\definecolor{orangeaccent}{RGB}{240,83,50}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+    width=\linewidth,
+    ybar,
+    bar width=7.5pt,
+    ymin=0,
+    enlarge x limits={abs=25pt},
+    legend style={draw=none,at={(0.5,-0.15)},
+    anchor=north,legend columns=-1},
+    xlabel={Jahre},
+    ylabel={Fotos pro Tag (in Millionen)},
+    symbolic x coords={2008,2009,2010,2011,2012,2013,2014},
+    xtick=data,
+    cycle list={blueaccent,greenaccent,purpleaccent,orangeaccent}
+  ]
+    \pgfplotsinvokeforeach{Facebook,Instagram,Snapchat,WhatsApp}{
+      \addplot+[draw=none,fill,] table[x=Year,y=#1]{\mytable};
+      \addlegendentry{#1}
+    }
+\end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
 ### [bar-multicolor.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor.tex)
 
 ![](./out/bar-multicolor.png)
@@ -334,6 +791,53 @@ The figures are sorted by filename.
 ```
 ****
 
+### [bar-percents-series-2.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-percents-series-2.tex)
+
+![](./out/bar-percents-series-2.png)
+
+  
+
+
+```tex
+% https://tex.stackexchange.com/a/547363/173708
+\documentclass{article}
+
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{10pt}%         % gap around plot
+
+\pgfplotsset{testbar/.style={
+    xbar stacked,
+    width=.8\textwidth,
+    xmajorgrids = true,
+    xmin=0,xmax=100,
+    ytick = data, yticklabels = {Sex,Handedness},
+    tick align = outside, xtick pos = left,
+    bar width=6mm, y=8mm,
+    nodes near coords={\pgfmathprintnumber{\pgfplotspointmeta}\%}, % <-- prints % sign after y coordinate value
+    xticklabel={\pgfmathprintnumber{\tick}\%},% <-- prints % sign after x tick value
+    nodes near coords align={center}, % <-- horizontal alignment centered of nodes 
+    enlarge y limits=0.5, % <-- Adds vertical space so to not crop the bars
+}}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[testbar]
+        \addplot coordinates{(58.8,1) (82.4,0)};
+        \addplot coordinates{(41.2,1) (17.6,0)};
+    \end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
 ### [barchart.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/barchart.tex)
 
 ![](./out/barchart.png)
@@ -381,6 +885,44 @@ The figures are sorted by filename.
         \addplot table[x=interval,y=carR]{\mydata};
         \legend{Trips, Distance, Energy}
     \end{axis}
+\end{tikzpicture}
+\end{document}
+```
+****
+
+### [bars_2-series.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bars_2-series.tex)
+
+![](./out/bars_2-series.png)
+
+  
+
+
+```tex
+% https://texample.net/tikz/examples/bar-chart/
+% Bar charts
+% Author: Stefan Kottwitz
+% https://www.packtpub.com/hardware-and-creative/latex-cookbook
+\documentclass[border=10pt]{standalone}
+\usepackage{pgfplots}
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[title  = Contributions per category
+                          at LaTeX-Community.org,
+    xbar,
+    y axis line style = { opacity = 0 },
+    axis x line       = none,
+    tickwidth         = 0pt,
+    enlarge y limits  = 0.2,
+    enlarge x limits  = 0.02,
+    symbolic y coords = {LaTeX, Tools, Distributions, Editors},
+    nodes near coords,
+  ]
+  \addplot coordinates { (57727,LaTeX)         (5672,Tools)
+                         (2193,Distributions)  (11106,Editors) };
+  \addplot coordinates { (14320,LaTeX)         (1615,Tools)
+                         (560,Distributions)   (3075,Editors)  };
+  \legend{Topics, Posts}
+  \end{axis}
 \end{tikzpicture}
 \end{document}
 ```

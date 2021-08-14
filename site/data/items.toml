@@ -15,12 +15,52 @@ description = "https://github.com/f0nzie/tikz_bars"
 url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-interval.tex"
  
 [[items]]
+title = "bar-multicolor-9000"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-9000.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-9000.png"
+alt = "bar-multicolor-9000"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-9000.tex"
+ 
+[[items]]
 title = "bar-multicolor-grids"
 image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-grids.png"
 thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-grids.png"
 alt = "bar-multicolor-grids"
 description = "https://github.com/f0nzie/tikz_bars"
 url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-grids.tex"
+ 
+[[items]]
+title = "bar-multicolor-multiseries-center-figure-9000[4star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure-9000[4star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure-9000[4star].png"
+alt = "bar-multicolor-multiseries-center-figure-9000[4star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-multiseries-center-figure-9000[4star].tex"
+ 
+[[items]]
+title = "bar-multicolor-multiseries-center-figure"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure.png"
+alt = "bar-multicolor-multiseries-center-figure"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-multiseries-center-figure.tex"
+ 
+[[items]]
+title = "bar-multicolor-multiseries-center-figure[4star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure[4star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure[4star].png"
+alt = "bar-multicolor-multiseries-center-figure[4star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-multiseries-center-figure[4star].tex"
+ 
+[[items]]
+title = "bar-multicolor-multiseries"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries.png"
+alt = "bar-multicolor-multiseries"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-multiseries.tex"
  
 [[items]]
 title = "bar-multicolor"
@@ -31,12 +71,28 @@ description = "https://github.com/f0nzie/tikz_bars"
 url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor.tex"
  
 [[items]]
+title = "bar-percents-series-2"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-percents-series-2.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-percents-series-2.png"
+alt = "bar-percents-series-2"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-percents-series-2.tex"
+ 
+[[items]]
 title = "barchart"
 image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/barchart.png"
 thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/barchart.png"
 alt = "barchart"
 description = "https://github.com/f0nzie/tikz_bars"
 url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/barchart.tex"
+ 
+[[items]]
+title = "bars_2-series"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bars_2-series.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bars_2-series.png"
+alt = "bars_2-series"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bars_2-series.tex"
  
 [[items]]
 title = "bars-2-yes-no"
