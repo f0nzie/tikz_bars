@@ -508,3 +508,18 @@ cat(readLines("./src/stacked_bar_with_text.tex"), sep = "\n")
 cat(readLines("./src/table-text.tex"), sep = "\n")
 ```
 `r b`
+****
+
+### [two_time_series_with_bounds.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/two_time_series_with_bounds.tex)
+
+![](./out/two_time_series_with_bounds.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/two_time_series_with_bounds.tex"), sep = "\n")
+```
+`r b`

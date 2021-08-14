@@ -96,9 +96,9 @@ Some useful tutorials:
 
 ## Useful statistics
 
-* There are 34 total Tikz figures saved as `.tex` files in this gallery. 
+* There are 35 total Tikz figures saved as `.tex` files in this gallery. 
 The figures are sorted by filename.
-* There are 34 files under `src/` to be compiled with `pdflatex`
+* There are 35 files under `src/` to be compiled with `pdflatex`
 * There are 0 files under `src/` to be compiled with `lualatex`
 * There are 0 data files under the folder `src/data` that are being used by the TikZ scripts
 * There are 0 Latex classes, styles and library files under the `src/texmf` folder
@@ -2607,6 +2607,60 @@ colnames from={Year},
 	A-C-Pr;31;<1;27.3
 	F-C-Pr;31;<1;27.3
 }
+\end{document}
+```
+****
+
+### [two_time_series_with_bounds.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/two_time_series_with_bounds.tex)
+
+![](./out/two_time_series_with_bounds.png)
+
+  
+
+
+```tex
+% Two times series with bounds
+% https://tex.stackexchange.com/a/96984/173708
+\documentclass{standalone}
+\usepackage{pgfplots, tikz}
+
+\usepackage{pgfplotstable}
+
+\pgfplotstableread{
+temps   y_h y_h__inf    y_h__sup    y_f y_f__inf    y_f__sup    
+
+1   0.237340    0.135170    0.339511    0.237653    0.135482    0.339823    
+2   0.561320    0.422007    0.700633    0.165871    0.026558    0.305184    
+3   0.694760    0.534205    0.855314    0.074856    -0.085698   0.235411    
+4   0.728306    0.560179    0.896432    0.003361    -0.164765   0.171487    
+5   0.711710    0.544944    0.878477    -0.044582   -0.211349   0.122184    
+6   0.671241    0.511191    0.831291    -0.073347   -0.233397   0.086703    
+7   0.621177    0.471219    0.771135    -0.088418   -0.238376   0.061540    
+8   0.569354    0.431826    0.706882    -0.094382   -0.231910   0.043146    
+9   0.519973    0.396571    0.643376    -0.094619   -0.218022   0.028783    
+10  0.475121    0.366990    0.583251    -0.091467   -0.199598   0.016664    
+}{\table}
+
+\begin{document}
+\begin{tikzpicture}
+
+    \begin{axis}
+    % y_h confidence interval
+    \addplot [stack plots=y, fill=none, draw=none, forget plot]   table [x=temps, y=y_h__inf]   {\table} \closedcycle;
+    \addplot [stack plots=y, fill=gray!50, opacity=0.4, draw opacity=0, area legend]   table [x=temps, y expr=\thisrow{y_h__sup}-\thisrow{y_h__inf}]   {\table} \closedcycle;
+    % subtract the upper bound so our stack is back at zero
+    \addplot [stack plots=y, stack dir=minus, forget plot, draw=none] table [x=temps, y=y_h__sup] {\table};
+
+    % y_f confidence interval
+    \addplot [stack plots=y, fill=none, draw=none, forget plot]   table [x=temps, y=y_f__inf]   {\table} \closedcycle;
+    \addplot [stack plots=y, fill=gray!50, opacity=0.4, draw opacity=0, area legend]   table [x=temps, y expr=\thisrow{y_f__sup}-\thisrow{y_f__inf}]   {\table} \closedcycle;
+
+    % the line plots (y_h and y_f)    
+    \addplot [stack plots=false, very thick,smooth,blue]  table [x=temps, y=y_h]   {\table};
+    \addplot [stack plots=false, very thick,smooth,blue]  table [x=temps, y=y_f]   {\table};
+    \end{axis}
+
+\end{tikzpicture}
 \end{document}
 ```
 
