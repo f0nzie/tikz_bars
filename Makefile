@@ -130,7 +130,7 @@ endif
 
 # remove PNG and PDF files
 .PHONY: clean
-clean: tidy cleanlualatex cleansource
+clean: tidy cleanlualatex cleansourcedir
 	find $(OUTPUT_DIR) -maxdepth 1 -name \*.png -delete
 	find $(OUTPUT_DIR) -maxdepth 1 -name \*.pdf -delete
 
@@ -151,8 +151,8 @@ tidy: chrono
         rm  $(README); \
     fi
 
-.PHONY: cleansource
-cleansource:
+.PHONY: cleansourcedir
+cleansourcedir:
 	find $(SOURCE_DIR) -maxdepth 1 -name \*.png -delete
 	find $(SOURCE_DIR) -maxdepth 1 -name \*.pdf -delete
 	find $(SOURCE_DIR) -maxdepth 1 -name \*.log -delete
