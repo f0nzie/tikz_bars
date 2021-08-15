@@ -96,9 +96,9 @@ Some useful tutorials:
 
 ## Useful statistics
 
-* There are 35 total Tikz figures saved as `.tex` files in this gallery. 
+* There are 36 total Tikz figures saved as `.tex` files in this gallery. 
 The figures are sorted by filename.
-* There are 35 files under `src/` to be compiled with `pdflatex`
+* There are 36 files under `src/` to be compiled with `pdflatex`
 * There are 0 files under `src/` to be compiled with `lualatex`
 * There are 0 data files under the folder `src/data` that are being used by the TikZ scripts
 * There are 0 Latex classes, styles and library files under the `src/texmf` folder
@@ -2498,6 +2498,76 @@ colnames from={Year},
         \plotfile{testdata.dat}
     \end{axis}
 \end{tikzpicture}
+\end{document}
+```
+****
+
+### [military_budget.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/military_budget.tex)
+
+![](./out/military_budget.png)
+
+  
+
+
+```tex
+% https://github.com/MartinThoma/LaTeX-examples/blob/master/tikz/bar-chart-military-budget/bar-chart-military-budget.tex
+\documentclass{article}
+\usepackage[pdftex,active,tightpage]{preview}
+\setlength\PreviewBorder{2mm}
+
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{helvet}
+\usepackage[eulergreek]{sansmath}
+
+% Sans serif fonts do not look as nice as serif fonts,
+% but they are much easier to read when the image is small
+\pgfplotsset{
+  tick label style = {font=\sansmath\sffamily},
+  every axis label = {font=\sansmath\sffamily},
+  legend style = {font=\sansmath\sffamily},
+  label style = {font=\sansmath\sffamily}
+}
+
+\begin{document}
+\begin{preview}
+\begin{tikzpicture}
+  \begin{axis}[
+    title              = US military budget,
+    % xlabel             = Year,
+    ylabel             = In constant (2010) billion US\$,
+    % Display option
+    width  = 12cm,
+    height = 10cm,
+    ymin   = 340,
+    ymax   = 760,
+    xmin   = 1987,
+    xmax   = 2011.9,
+    % Configuration
+    title style                         = {font=\bfseries},
+    x tick label style                  = {/pgf/number format/1000 sep=,
+    inner sep=0pt,
+            anchor=north east,
+            rotate=45 },
+    legend style                        = {at={(0.5,-0.15)},
+    anchor                              = north,legend columns=-1},
+    ybar                                = 5pt,  % configures ‘bar shift’
+    bar width                           = 9pt,
+    nodes near coords,
+    every node near coord/.append style = {rotate=90, anchor=west, font=\small\sansmath\sffamily},
+    point meta                          = y,  % the displayed number
+  ]
+    \addplot
+    coordinates {(1988, 540.415) (1989, 534.906) (1990, 510.998)
+        (1991, 448.806) (1992, 474.215) (1993, 449.281) (1994, 421.917)
+        (1995, 399.043) (1996, 377.342) (1997, 375.375) (1998, 366.918)
+        (1999, 367.822) (2000, 382.061) (2001, 385.142) (2002, 432.452)
+        (2003, 492.200) (2004, 536.459) (2005, 562.039) (2006, 570.769)
+        (2007, 585.749) (2008, 629.095) (2009, 679.574) (2010, 698.281)
+        (2011, 689.591) };
+  \end{axis}
+\end{tikzpicture}
+\end{preview}
 \end{document}
 ```
 ****

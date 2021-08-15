@@ -480,6 +480,21 @@ cat(readLines("./src/dynamic-linechart-read-from-table-pgf.tex"), sep = "\n")
 `r b`
 ****
 
+### [military_budget.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/military_budget.tex)
+
+![](./out/military_budget.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/military_budget.tex"), sep = "\n")
+```
+`r b`
+****
+
 ### [stacked_bar_with_text.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/stacked_bar_with_text.tex)
 
 ![](./out/stacked_bar_with_text.png)
