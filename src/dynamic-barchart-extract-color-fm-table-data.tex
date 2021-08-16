@@ -1,0 +1,91 @@
+% Select color of a bar plot from table value
+% https://tex.stackexchange.com/questions/493962/select-color-of-a-bar-plot-from-table-value
+
+\documentclass{article}
+\usepackage{pgfplots, pgfplotstable}
+\pgfplotsset{compat=1.16}
+\usetikzlibrary{calc}
+\usepackage[utf8]{inputenc}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{20pt}%         % gap around plot
+
+\pgfkeys{/pgf/shapes/xbar/height/.initial=10cm,/pgf/shapes/xbar/width/.initial=6pt}
+
+\pgfdeclareplotmark{xbar}{%
+    \pgfpathrectangle{\pgfpoint{0pt}{-.5*\pgfkeysvalueof{/pgf/shapes/xbar/width}}{0pt}}{%
+    \pgfpoint{-\pgfkeysvalueof{/pgf/shapes/xbar/height}}{\pgfkeysvalueof{/pgf/shapes/xbar/width}}}
+    \pgfusepath{stroke,fill}}
+
+\begin{document}
+
+\pgfplotstableread[col sep=comma]{
+	label, startyear, endyear, color  
+	Washington, 1789, 1797, black!50
+	Adams, 1797, 1801, red!30
+	Jefferson, 1801, 1809, green!50
+	Madison, 1801, 1809, brown!50
+}\loadedtable
+
+% sort by startyear
+\pgfplotstablesort[sort key=startyear]\sortedtable\loadedtable
+
+\begin{tikzpicture}
+	\begin{axis}[
+		xmin=1785, 
+		xmax=1810, 
+		height=4cm,
+		/pgf/shapes/xbar/width=0.2cm,
+	  	axis lines=left,
+	  	width=\textwidth, 
+	  	enlarge y limits={abs=0.5},
+	  	ytick=\empty,
+	  	scatter/@pre marker code/.code={
+		  \pgfplotstablegetelem{\coordindex}{color}\of{\sortedtable}
+		  \edef\mycolor{\pgfplotsretval}
+		  \pgfplotstablegetelem{\coordindex}{startyear}\of{\sortedtable}
+		  \edef\startyear{\pgfplotsretval}
+		  \pgfplotstablegetelem{\coordindex}{endyear}\of{\sortedtable}
+		  \edef\endyear{\pgfplotsretval}
+		  \pgfmathsetmacro{\myheight}{(\endyear-\startyear)*\xunit} % height
+		  \scope[fill=\mycolor,/pgf/shapes/xbar/height=\myheight pt] },
+	  legend style={at={(1,1.5)}}
+	]
+	
+	\addplot [xbar stacked,draw=none, forget plot] table [col sep=comma,x=startyear, y expr=-\coordindex]{\sortedtable};
+	\path let \p1=($(1786,0)-(1785,0)$)    in \pgfextra{\xdef\xunit{\x1}}; % measure x unit
+	
+	\addplot[
+		only marks, 
+		scatter, 
+		mark=xbar,
+	   	nodes near coords*, 
+	   	forget plot,
+		nodes near coords align={anchor=west},
+		point meta=explicit symbolic, 
+		every node near coord/.append style={black}]  
+	 		table[
+	 			col sep=comma, 
+	 			y expr=-\coordindex, 
+	 			x expr=\thisrow{endyear}, 
+	 			meta=label]{\sortedtable};
+	 
+	 % create object NumRows that we will use in foreach
+	 \pgfplotstablegetrowsof{\sortedtable} 
+	 \pgfmathtruncatemacro{\NumRows}{\pgfplotsretval-1} 
+
+%		adds a colored legend	 
+%	 \pgfplotsinvokeforeach{0,...,\NumRows}{
+%		\pgfplotstablegetelem{#1}{color}\of{\sortedtable}
+%		\edef\mycolor{\pgfplotsretval}
+%		\pgfplotstablegetelem{#1}{label}\of{\sortedtable}
+%		\edef\mylabel{\pgfplotsretval}
+%		\edef\temp{\noexpand\addlegendimage{area legend,fill=\mycolor}
+%		\noexpand\addlegendentry{\mylabel}}
+%		\temp
+%	 }
+	\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,114 @@
+% Vertical bar chart with different colors for each bar [duplicate]
+% https://tex.stackexchange.com/questions/381213/vertical-bar-chart-with-different-colors-for-each-bar?noredirect=1&lq=1
+
+% CHANGES
+% add table
+
+\documentclass{article}
+
+
+\usepackage{xcolor}
+\usepackage{pgfplots, pgfplotstable}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{10pt}%         % gap around plot
+
+
+\definecolor{hous}{HTML}{b88b4d}
+\definecolor{green}{HTML}{79c561}
+\definecolor{farming}{HTML}{ded94c}
+\definecolor{trans}{HTML}{b4b4a9}
+\definecolor{services}{HTML}{ff362e}
+\definecolor{other}{HTML}{dbd4d3}
+\definecolor{industry}{HTML}{db79c0}
+\definecolor{water}{HTML}{7982db}
+\definecolor{techinfra}{HTML}{303355}
+
+\pgfkeys{/pgf/shapes/ybar/height/.initial=10cm,/pgf/shapes/ybar/width/.initial=6pt}
+
+\pgfdeclareplotmark{ybar}{%
+	\pgfpathrectangle{\pgfpoint{0pt}{-.5*\pgfkeysvalueof{/pgf/shapes/ybar/width}}{0pt}}{%
+		\pgfpoint{-\pgfkeysvalueof{/pgf/shapes/ybar/height}}{\pgfkeysvalueof{/pgf/shapes/ybar/width}}}
+	\pgfusepath{stroke,fill}}
+
+\begin{document}
+	
+\pgfplotstableread[col sep=comma]{
+Category, 	 	Value,  Color
+Housing,   	  	28,	  	hous
+Urban green,	28, 	green
+Farmlands,		12, 	farming
+Transportation, 10, 	trans
+Services,		 7, 	services
+Other,			 6,		other
+Industrial,		 5,		industry
+Water bodies,	 3,		water
+Technical,		 1,		techinfra
+}\datatable	
+	
+\begin{center}
+	\begin{figure} 
+		\label{landuse}
+		\begin{tikzpicture}
+		\begin{axis}[
+			ybar=-1cm,
+			axis x line*=bottom,
+			axis y line*=left,
+			height=8cm, 
+			width=\textwidth,
+			bar width=1cm,
+			/pgf/shapes/ybar/width=0.2cm,
+			ylabel={Share of land use in [\%]},
+			symbolic x coords={Housing,Urban green,Farmlands,Transportation,Services,Other,Industrial,Water bodies,Technical},
+			x tick label style={rotate=45, anchor=east, align=left},
+			nodes near coords,
+			nodes near coords align={vertical},
+			scatter/@pre marker code/.code={
+				\pgfplotstablegetelem{\coordindex}{Color}\of{\datatable}
+				\edef\mycolor{\pgfplotsretval}
+				\pgfplotstablegetelem{\coordindex}{Value}\of{\datatable}
+				\edef\myvalue{\pgfplotsretval}
+				\pgfmathsetmacro{\myheight}{(\myvalue)}
+%				\scope[fill=\mycolor,/pgf/shapes/ybar/height=\myheight pt] 
+			},
+			]
+
+			
+%%			\addplot+[hous,fill] table[x=Category,y=Value] {\datatable};
+			\addplot+ table[x=Category,y=Value] {\datatable};	
+
+		 \pgfplotstablegetrowsof{\datatable} 
+		\pgfmathtruncatemacro{\NumRows}{\pgfplotsretval-1} 
+			
+		 \pgfplotsinvokeforeach{0,...,\NumRows}{
+		 	\pgfplotstablegetelem{#1}{Color}\of{\datatable}
+		 	\edef\mycolor{\pgfplotsretval}
+		 	\pgfplotstablegetelem{#1}{Category}\of{\datatable}
+		 	\edef\mylabel{\pgfplotsretval}
+		 	\edef\temp{\noexpand\addlegendimage{area legend,fill=\mycolor}
+		 		\noexpand\addlegendentry{\mylabel}}
+		 	\temp
+		 }		
+			
+			
+%			\addplot[hous,fill] coordinates {(Housing,28)};
+%			\addplot[green,fill] coordinates {(Urban green,28)};
+%			\addplot[farming,fill] coordinates {(Farmlands,12)};
+%			\addplot[trans,fill] coordinates {(Transportation,10)};
+%			\addplot[services,fill] coordinates {(Services,7)};
+%			\addplot[other,fill] coordinates {(Other,6)};
+%			\addplot[industry,fill] coordinates {(Industrial,5)};
+%			\addplot[water,fill] coordinates {(Water bodies,3)};
+%			\addplot[techinfra,fill] coordinates {(Technical,1)};  
+			          
+		\end{axis}
+		\end{tikzpicture}   
+	\end{figure}
+\end{center}
+
+     \pgfplotstabletypeset[string type]{\datatable}            % print original table
+\end{document}

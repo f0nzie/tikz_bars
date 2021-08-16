@@ -1,0 +1,36 @@
+% https://tex.stackexchange.com/a/547363/173708
+\documentclass{article}
+
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{10pt}%         % gap around plot
+
+\pgfplotsset{testbar/.style={
+    xbar stacked,
+    width=.8\textwidth,
+    xmajorgrids = true,
+    xmin=0,xmax=100,
+    ytick = data, yticklabels = {Sex,Handedness},
+    tick align = outside, xtick pos = left,
+    bar width=6mm, y=8mm,
+    nodes near coords={\pgfmathprintnumber{\pgfplotspointmeta}\%}, % <-- prints % sign after y coordinate value
+    xticklabel={\pgfmathprintnumber{\tick}\%},% <-- prints % sign after x tick value
+    nodes near coords align={center}, % <-- horizontal alignment centered of nodes 
+    enlarge y limits=0.5, % <-- Adds vertical space so to not crop the bars
+}}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[testbar]
+        \addplot coordinates{(58.8,1) (82.4,0)};
+        \addplot coordinates{(41.2,1) (17.6,0)};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

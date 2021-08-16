@@ -1,0 +1,41 @@
+\documentclass{standalone}
+\usepackage{pgfplotstable}
+\pgfplotstableread[col sep=comma]{
+	Year, Facebook, Instagram, Snapchat, WhatsApp
+	2008, 17, 0,0,0
+	2009,69,0,0,0
+	2010,197,0,0,0
+	2011,249,9,0,0
+	2012,300,9,51,0
+	2013,343,51,394,394
+	2014,351,60,703,703
+	}\mytable
+
+\definecolor{blueaccent}{RGB}{0,150,214}
+\definecolor{greenaccent}{RGB}{0,139,43}
+\definecolor{purpleaccent}{RGB}{130,41,128}
+\definecolor{orangeaccent}{RGB}{240,83,50}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+    width=\linewidth,
+    ybar,
+    bar width=7.5pt,
+    ymin=0,
+    enlarge x limits={abs=25pt},
+    legend style={draw=none,at={(0.5,-0.15)},
+    anchor=north,legend columns=-1},
+    xlabel={Jahre},
+    ylabel={Fotos pro Tag (in Millionen)},
+    symbolic x coords={2008,2009,2010,2011,2012,2013,2014},
+    xtick=data,
+    cycle list={blueaccent,greenaccent,purpleaccent,orangeaccent}
+  ]
+    \pgfplotsinvokeforeach{Facebook,Instagram,Snapchat,WhatsApp}{
+      \addplot+[draw=none,fill,] table[x=Year,y=#1]{\mytable};
+      \addlegendentry{#1}
+    }
+\end{axis}
+\end{tikzpicture}
+\end{document}

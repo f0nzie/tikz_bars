@@ -1,0 +1,132 @@
+% 9000: call as a function
+% https://www.latex4technics.com/?note=U130YI
+% https://tex.stackexchange.com/a/370552/173708
+\documentclass[a4paper, 12pt]{article}
+\usepackage[paperwidth=5in, paperheight=3.2in]{geometry}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=newest}
+\geometry{left=0mm, right=3mm,top=6mm, bottom=3mm,}
+
+\definecolor{mygr}{HTML}{e6e6e6}
+
+\begin{document}
+
+% \newcount\ga
+% \ga=1 %
+
+% param 1: y-max
+\newcommand{\barchart}[2]{%
+\begin{figure}[!t]
+  \centering
+
+  % Calculate total
+  \newcounter{nodenumber}
+  \pgfmathsetmacro{\cumnum}{0}
+  \pgfmathsetmacro{\totalnum}{0}%
+  \foreach \value/\width/\colour/\name [count=\i] in {#2} {%
+    % \pgfmathsetmacro{\newcumnum}{\cumnum + 1}
+      \pgfmathparse{\value+\totalnum}%
+      \stepcounter{nodenumber}
+      \global\let\totalnum=\pgfmathresult%
+      \global\let\cumnum=\i
+      %  \i, \value, \width, \colour, \name, {\arabic{nodenumber}}. \par
+  }%  
+  Totalnum: \totalnum, \cumnum
+
+  \gdef\xticks{}
+  \foreach \i in {1,2,3,4,5} {
+    \xdef\xticks{\xticks \i}
+  }
+  % \xdef\xticks{\xticks 2}
+  \xticks
+
+  \begin{tikzpicture}
+    \begin{axis}[
+        /pgf/number format/1000 sep={},
+        width=3.8in,
+        height=1.8in,
+        at={(0.758in,0.981in)},
+        scale only axis,
+        clip=false,
+        separate axis lines,
+        axis on top,
+        xmin=0,
+        xmax=\cumnum+1,
+        xtick={1,2,3,4,5},
+        % xtick=\xticks,
+        % xtick={\foreach \value [count=\i] in {#2} {\i}},
+        x tick style={draw=none},
+        xticklabels={GREEN,BLUE,GREY,RED, BLUE},
+        % xticklabels={\foreach \value/\width/\colour/\name in {#2} {\colour;\\}},
+        ytick={0, 5, 10, 20},
+        ymin=0,
+        ymax=#1,
+        ylabel={YYY},
+        ymajorgrids,
+        every axis plot/.append style={
+          ybar,
+          bar width=.2,
+          bar shift=0pt,
+          fill
+        }
+      ]
+
+      % \newcount\ga
+      % \ga=1 %
+      % \addplot[green]coordinates {(\ga,6)};
+      % \advance\ga by1;
+      % \addplot[blue]coordinates{(\ga,11)};
+      % \advance\ga by1;
+      % \addplot[mygr]coordinates{(\ga,12)};
+      % \advance\ga by1;
+      % \addplot[red]coordinates{(\ga,18)};
+
+
+    \foreach \value / \width / \colour / \name [count=\i] in {#2} {%
+      \edef\temp{%
+        \noexpand\addplot[\colour]coordinates{(\i, \value)};
+      }
+      \temp;
+    }%
+
+
+      
+    \end{axis}
+
+  \end{tikzpicture}
+\end{figure}
+}
+
+% \barchart{2500}
+
+% \barchart{2500}{%
+%   10/13em/accent!30/Sleeping \& dreaming about work,
+%   25/9em/accent!60/resolving issues with investors,
+%   20/11em/accent!40/Spending time with family,
+%   5/8em/accent!70/Baking cupcakes
+% }
+
+\barchart{30}{%
+  10/13em/green/Sleeping dreaming about work,
+  25/9em/blue/resolving issues with investors,
+  20/11em/mygr/Spending time with family,
+  5/8em/red/Baking cupcakes,
+  15/13em/blue/Sleeping
+}
+
+% \foreach \x [count = \xi from 1] in {a,...,c,f,...,z}
+%   \xi, $\x$;
+
+% \newcounter{ga}\setcounter{ga}{0}
+% \foreach \t in {1,...,10}{\stepcounter{ga}}
+%   \thega
+
+% % return elements in alist
+% \gdef\alist{}
+% \foreach \i in {1,2,3,4} {
+%  \xdef\alist{\alist \i,}
+% }
+% \alist
+
+\end{document}

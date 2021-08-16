@@ -1,24 +1,288 @@
 [[items]]
 title = "bar-horiz-5_points"
-image = "https://github.com/f0nzie/tikz_bars/raw/master/out/bar-horiz-5_points.png"
-thumb = "https://github.com/f0nzie/tikz_bars/raw/master/out/bar-horiz-5_points.png"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-horiz-5_points.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-horiz-5_points.png"
 alt = "bar-horiz-5_points"
 description = "https://github.com/f0nzie/tikz_bars"
-url = "https://github.com/f0nzie/tikz_bars/blob/master/src/bar-horiz-5_points.tex"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-horiz-5_points.tex"
+ 
+[[items]]
+title = "bar-interval"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-interval.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-interval.png"
+alt = "bar-interval"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-interval.tex"
+ 
+[[items]]
+title = "bar-multicolor-9000"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-9000.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-9000.png"
+alt = "bar-multicolor-9000"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-9000.tex"
+ 
+[[items]]
+title = "bar-multicolor-grids"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-grids.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-grids.png"
+alt = "bar-multicolor-grids"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-grids.tex"
+ 
+[[items]]
+title = "bar-multicolor-multiseries-center-figure-9000[4star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure-9000[4star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure-9000[4star].png"
+alt = "bar-multicolor-multiseries-center-figure-9000[4star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-multiseries-center-figure-9000[4star].tex"
+ 
+[[items]]
+title = "bar-multicolor-multiseries-center-figure"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure.png"
+alt = "bar-multicolor-multiseries-center-figure"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-multiseries-center-figure.tex"
+ 
+[[items]]
+title = "bar-multicolor-multiseries-center-figure[4star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure[4star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries-center-figure[4star].png"
+alt = "bar-multicolor-multiseries-center-figure[4star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-multiseries-center-figure[4star].tex"
+ 
+[[items]]
+title = "bar-multicolor-multiseries"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor-multiseries.png"
+alt = "bar-multicolor-multiseries"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor-multiseries.tex"
  
 [[items]]
 title = "bar-multicolor"
-image = "https://github.com/f0nzie/tikz_bars/raw/master/out/bar-multicolor.png"
-thumb = "https://github.com/f0nzie/tikz_bars/raw/master/out/bar-multicolor.png"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-multicolor.png"
 alt = "bar-multicolor"
 description = "https://github.com/f0nzie/tikz_bars"
-url = "https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor.tex"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-multicolor.tex"
+ 
+[[items]]
+title = "bar-percents-series-2"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-percents-series-2.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bar-percents-series-2.png"
+alt = "bar-percents-series-2"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bar-percents-series-2.tex"
  
 [[items]]
 title = "barchart"
-image = "https://github.com/f0nzie/tikz_bars/raw/master/out/barchart.png"
-thumb = "https://github.com/f0nzie/tikz_bars/raw/master/out/barchart.png"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/barchart.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/barchart.png"
 alt = "barchart"
 description = "https://github.com/f0nzie/tikz_bars"
-url = "https://github.com/f0nzie/tikz_bars/blob/master/src/barchart.tex"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/barchart.tex"
+ 
+[[items]]
+title = "bars_2-series"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bars_2-series.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bars_2-series.png"
+alt = "bars_2-series"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bars_2-series.tex"
+ 
+[[items]]
+title = "bars-2-yes-no"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bars-2-yes-no.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/bars-2-yes-no.png"
+alt = "bars-2-yes-no"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/bars-2-yes-no.tex"
+ 
+[[items]]
+title = "custom_labels"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/custom_labels.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/custom_labels.png"
+alt = "custom_labels"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/custom_labels.tex"
+ 
+[[items]]
+title = "dynamic-axis-pgf"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-axis-pgf.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-axis-pgf.png"
+alt = "dynamic-axis-pgf"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-axis-pgf.tex"
+ 
+[[items]]
+title = "dynamic-barchart-autocolor"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-autocolor.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-autocolor.png"
+alt = "dynamic-barchart-autocolor"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-autocolor.tex"
+ 
+[[items]]
+title = "dynamic-barchart-color-from-table-pgf"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-color-from-table-pgf.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-color-from-table-pgf.png"
+alt = "dynamic-barchart-color-from-table-pgf"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-color-from-table-pgf.tex"
+ 
+[[items]]
+title = "dynamic-barchart-discard-column-fm-table-4star-"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-discard-column-fm-table-4star-.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-discard-column-fm-table-4star-.png"
+alt = "dynamic-barchart-discard-column-fm-table-4star-"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-discard-column-fm-table-4star-.tex"
+ 
+[[items]]
+title = "dynamic-barchart-discard-column-fm-table-9000-4star-"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-discard-column-fm-table-9000-4star-.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-discard-column-fm-table-9000-4star-.png"
+alt = "dynamic-barchart-discard-column-fm-table-9000-4star-"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-discard-column-fm-table-9000-4star-.tex"
+ 
+[[items]]
+title = "dynamic-barchart-extract-color-fm-table-data-9000[5star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-extract-color-fm-table-data-9000[5star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-extract-color-fm-table-data-9000[5star].png"
+alt = "dynamic-barchart-extract-color-fm-table-data-9000[5star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-extract-color-fm-table-data-9000[5star].tex"
+ 
+[[items]]
+title = "dynamic-barchart-extract-color-fm-table-data"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-extract-color-fm-table-data.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-extract-color-fm-table-data.png"
+alt = "dynamic-barchart-extract-color-fm-table-data"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-extract-color-fm-table-data.tex"
+ 
+[[items]]
+title = "dynamic-barchart-from-table-pgf-9000"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-from-table-pgf-9000.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-from-table-pgf-9000.png"
+alt = "dynamic-barchart-from-table-pgf-9000"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-from-table-pgf-9000.tex"
+ 
+[[items]]
+title = "dynamic-barchart-from-table-pgf"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-from-table-pgf.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-from-table-pgf.png"
+alt = "dynamic-barchart-from-table-pgf"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-from-table-pgf.tex"
+ 
+[[items]]
+title = "dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star].png"
+alt = "dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star].tex"
+ 
+[[items]]
+title = "dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star].png"
+alt = "dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star].tex"
+ 
+[[items]]
+title = "dynamic-barchart-read-xticklabels-fm-table-[4star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-read-xticklabels-fm-table-[4star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-read-xticklabels-fm-table-[4star].png"
+alt = "dynamic-barchart-read-xticklabels-fm-table-[4star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-read-xticklabels-fm-table-[4star].tex"
+ 
+[[items]]
+title = "dynamic-barchart-read-xticklabels-fm-table-resume-[4star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-read-xticklabels-fm-table-resume-[4star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-read-xticklabels-fm-table-resume-[4star].png"
+alt = "dynamic-barchart-read-xticklabels-fm-table-resume-[4star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-read-xticklabels-fm-table-resume-[4star].tex"
+ 
+[[items]]
+title = "dynamic-barchart-transposing-table-[5star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-transposing-table-[5star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-transposing-table-[5star].png"
+alt = "dynamic-barchart-transposing-table-[5star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-transposing-table-[5star].tex"
+ 
+[[items]]
+title = "dynamic-barchart-transposing-table-9000-[5star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-transposing-table-9000-[5star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-transposing-table-9000-[5star].png"
+alt = "dynamic-barchart-transposing-table-9000-[5star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-transposing-table-9000-[5star].tex"
+ 
+[[items]]
+title = "dynamic-barchart-transposing-table-resume-[5star]"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-transposing-table-resume-[5star].png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-transposing-table-resume-[5star].png"
+alt = "dynamic-barchart-transposing-table-resume-[5star]"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-transposing-table-resume-[5star].tex"
+ 
+[[items]]
+title = "dynamic-barchart-xticks-fm-data"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-xticks-fm-data.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-barchart-xticks-fm-data.png"
+alt = "dynamic-barchart-xticks-fm-data"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-barchart-xticks-fm-data.tex"
+ 
+[[items]]
+title = "dynamic-linechart-read-from-table-pgf"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-linechart-read-from-table-pgf.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/dynamic-linechart-read-from-table-pgf.png"
+alt = "dynamic-linechart-read-from-table-pgf"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/dynamic-linechart-read-from-table-pgf.tex"
+ 
+[[items]]
+title = "military_budget"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/military_budget.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/military_budget.png"
+alt = "military_budget"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/military_budget.tex"
+ 
+[[items]]
+title = "stacked_bar_with_text"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/stacked_bar_with_text.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/stacked_bar_with_text.png"
+alt = "stacked_bar_with_text"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/stacked_bar_with_text.tex"
+ 
+[[items]]
+title = "table-text"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/table-text.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/table-text.png"
+alt = "table-text"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/table-text.tex"
+ 
+[[items]]
+title = "two_time_series_with_bounds"
+image = "https://github.com/f0nzie/tikz_bars/raw/develop/out/two_time_series_with_bounds.png"
+thumb = "https://github.com/f0nzie/tikz_bars/raw/develop/out/two_time_series_with_bounds.png"
+alt = "two_time_series_with_bounds"
+description = "https://github.com/f0nzie/tikz_bars"
+url = "https://github.com/f0nzie/tikz_bars/blob/develop/src/two_time_series_with_bounds.tex"
  

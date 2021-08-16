@@ -1,0 +1,68 @@
+% Reading xticklabels from a csv
+% https://tex.stackexchange.com/questions/290322/reading-xticklabels-from-a-csv?rq=1
+
+% original table modified. some decimals out
+% comment ymin, ymax
+
+\documentclass{standalone}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+    \pgfplotsset{compat=1.13}
+\usepackage{filecontents}
+
+% (at least to my knowledge) it is _required_ to have balanced rows!
+% to do so just write `NaN' in each cell you don't need/have a value
+\begin{filecontents}{EvalSummaryIndiv.csv}
+	AgentTypesL, OriginalL, MergedL, DifferenceL,AgentTypesS,OriginalS,MergedS,DifferenceS
+	m_snc_03,    0.022848, 0.011350,  0.0114972,  {ms03},    0.022848, 0.022985, -0.000137
+	m_snc_47,    0.023735, 0.010186,  0.0135318,  {ms47},    0.023735, 0.023995, -0.000260
+	m_snc_811,   0.024401, 0.011037,  0.0133693,  {ms811},   0.024401, 0.024248,  0.000152
+	m_snc_1215,  0.023291, 0.026428, -0.0031928,  {ms333},       NaN,     NaN,    0.000200
+\end{filecontents}
+
+% read table
+\pgfplotstableread[
+    col sep=comma,
+        ]{EvalSummaryIndiv.csv}\datatable
+
+\begin{document}
+	
+\begin{tikzpicture}
+	\begin{axis}[
+	    ybar,
+%	    ymin=-0.0010,    % <-- changed; original value: -0.010
+%	    ymax=0.0010,     % <-- changed; original value:  0.010
+	    scaled ticks=false,
+	    xlabel={Agent categories},
+	    xtick=data,
+	    xticklabels from table={\datatable}{AgentTypesS},
+	    ylabel={Proportion of agents},
+%	    ytick={-0.05,-0.002,-0.0005,0,0.0005,0.002,0.05},
+	    yticklabel style={
+	        /pgf/number format/.cd,
+	            fixed,
+	%                fixed zerofill,
+	            precision=4,
+	        /tikz/.cd,
+	    },
+	    legend style={
+	        legend pos=north west,
+	        font=\small,
+	    },
+	    ymajorgrids=true,
+	    grid style=dashed,
+	]
+	    \addplot[
+	        color=black,
+	        fill=blue!60!white,
+	    ] table[
+	%         x=AgentTypesS,     % <-- this line caused an error
+	        % just use the row index of the `\datatable' as x value
+	        x expr=\coordindex,
+	        y index={7},       % column index starting at zero
+	    ] {\datatable};
+	    \legend{Difference between original and merged}
+	\end{axis}
+\end{tikzpicture}
+
+\end{document}

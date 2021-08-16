@@ -1,0 +1,89 @@
+% Different color for individual bar in bar chart & adding bar labels
+% https://tex.stackexchange.com/questions/80012/different-color-for-individual-bar-in-bar-chart-adding-bar-labels
+
+%\documentclass{article}
+\documentclass{standalone}
+\usepackage{filecontents}
+\usepackage{tikz}
+\usepackage{pgfplots,pgfplotstable} 
+
+\pgfplotsset{
+	discard if/.style 2 args={
+	    x filter/.code={
+	        \ifdim\thisrow{#1} pt=#2pt
+	            \def\pgfmathresult{inf}
+	        \fi
+	    }
+	},
+	discard if not/.style 2 args={
+	    x filter/.code={
+	        \ifdim\thisrow{#1} pt=#2pt
+	        \else
+	            \def\pgfmathresult{inf}
+	        \fi
+	    }
+	}
+}
+
+\begin{filecontents}{EvalAbgelehntePP.dat}
+	Wert PP  HaeufigkeitAbs  HaeufigkeitRel
+	1    4        682        61.49684400360685
+	2    5        630        56.80793507664562
+	3    7        457        41.2082957619477
+	4    9        414        37.33092876465284
+	5    1        403        36.339044183949504
+	6    8        394        35.527502254283135
+	7    6        360        32.46167718665464
+	8    3        268        24.16591523895401
+	9    2        254        22.90351668169522
+	10  10        207        18.66546438232642
+	11  {\rotatebox{90}{not rejected}}  226 20.378719567177637
+\end{filecontents}
+
+\begin{document}
+
+\begin{tikzpicture} 
+	\begin{axis}[ 
+	    ybar,
+	    xtick={1,...,11},
+%	    xtick=data,       % get xticks from data
+	    xticklabels from table = {EvalAbgelehntePP.dat}{PP},
+	    xtick align=inside,
+	    xlabel={production programms},
+	    every axis x label/.style={at={(ticklabel cs:0.5)},anchor=near ticklabel},
+	    ylabel=occurrence,
+	    every axis y label/.style={at={(ticklabel cs:0.5)},rotate=90,anchor=near ticklabel}
+	] 
+	
+	% first layer
+	\addplot[ybar, bar shift=0pt, fill=blue,
+	    discard if={Wert}{11},
+	    nodes near coords=\pgfmathprintnumber{\pgfplotspointmeta}\%,
+	    every node near coord/.style={
+	        font=\scriptsize,
+	        /pgf/number format/precision=0
+	    },
+	    point meta=explicit] table [ 
+	    x=Wert, 
+	    y=HaeufigkeitAbs,
+	    meta=HaeufigkeitRel
+	] {EvalAbgelehntePP.dat} ;
+	
+	% second layer
+	\addplot[ybar, bar shift=0pt, fill=orange,
+	    discard if not={Wert}{11},
+	    nodes near coords=\pgfmathprintnumber{\pgfplotspointmeta}\%,
+	    every node near coord/.style={
+	        font=\scriptsize,
+	        /pgf/number format/precision=0
+	    },
+	    point meta=explicit] table [ 
+	    x=Wert, 
+	    y=HaeufigkeitAbs,
+	    meta=HaeufigkeitRel
+	] {EvalAbgelehntePP.dat} ;
+	
+	\end{axis} 
+\end{tikzpicture} 
+
+\end{document}

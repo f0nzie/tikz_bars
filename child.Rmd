@@ -15,6 +15,111 @@ cat(readLines("./src/bar-horiz-5_points.tex"), sep = "\n")
 `r b`
 ****
 
+### [bar-interval.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-interval.tex)
+
+![](./out/bar-interval.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bar-interval.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [bar-multicolor-9000.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-9000.tex)
+
+![](./out/bar-multicolor-9000.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bar-multicolor-9000.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [bar-multicolor-grids.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-grids.tex)
+
+![](./out/bar-multicolor-grids.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bar-multicolor-grids.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [bar-multicolor-multiseries-center-figure-9000[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-multiseries-center-figure-9000[4star].tex)
+
+![](./out/bar-multicolor-multiseries-center-figure-9000[4star].png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bar-multicolor-multiseries-center-figure-9000[4star].tex"), sep = "\n")
+```
+`r b`
+****
+
+### [bar-multicolor-multiseries-center-figure.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-multiseries-center-figure.tex)
+
+![](./out/bar-multicolor-multiseries-center-figure.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bar-multicolor-multiseries-center-figure.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [bar-multicolor-multiseries-center-figure[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-multiseries-center-figure[4star].tex)
+
+![](./out/bar-multicolor-multiseries-center-figure[4star].png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bar-multicolor-multiseries-center-figure[4star].tex"), sep = "\n")
+```
+`r b`
+****
+
+### [bar-multicolor-multiseries.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor-multiseries.tex)
+
+![](./out/bar-multicolor-multiseries.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bar-multicolor-multiseries.tex"), sep = "\n")
+```
+`r b`
+****
+
 ### [bar-multicolor.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-multicolor.tex)
 
 ![](./out/bar-multicolor.png)
@@ -30,6 +135,21 @@ cat(readLines("./src/bar-multicolor.tex"), sep = "\n")
 `r b`
 ****
 
+### [bar-percents-series-2.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bar-percents-series-2.tex)
+
+![](./out/bar-percents-series-2.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bar-percents-series-2.tex"), sep = "\n")
+```
+`r b`
+****
+
 ### [barchart.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/barchart.tex)
 
 ![](./out/barchart.png)
@@ -41,5 +161,380 @@ cat(readLines("./src/bar-multicolor.tex"), sep = "\n")
 ```{r}
 # change pgf to tex
 cat(readLines("./src/barchart.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [bars_2-series.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bars_2-series.tex)
+
+![](./out/bars_2-series.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bars_2-series.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [bars-2-yes-no.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/bars-2-yes-no.tex)
+
+![](./out/bars-2-yes-no.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/bars-2-yes-no.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [custom_labels.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/custom_labels.tex)
+
+![](./out/custom_labels.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/custom_labels.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-axis-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-axis-pgf.tex)
+
+![](./out/dynamic-axis-pgf.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-axis-pgf.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-autocolor.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-autocolor.tex)
+
+![](./out/dynamic-barchart-autocolor.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-autocolor.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-color-from-table-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-color-from-table-pgf.tex)
+
+![](./out/dynamic-barchart-color-from-table-pgf.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-color-from-table-pgf.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-discard-column-fm-table-4star-.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-discard-column-fm-table-4star-.tex)
+
+![](./out/dynamic-barchart-discard-column-fm-table-4star-.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-discard-column-fm-table-4star-.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-discard-column-fm-table-9000-4star-.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-discard-column-fm-table-9000-4star-.tex)
+
+![](./out/dynamic-barchart-discard-column-fm-table-9000-4star-.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-discard-column-fm-table-9000-4star-.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-extract-color-fm-table-data-9000[5star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-extract-color-fm-table-data-9000[5star].tex)
+
+![](./out/dynamic-barchart-extract-color-fm-table-data-9000[5star].png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-extract-color-fm-table-data-9000[5star].tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-extract-color-fm-table-data.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-extract-color-fm-table-data.tex)
+
+![](./out/dynamic-barchart-extract-color-fm-table-data.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-extract-color-fm-table-data.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-from-table-pgf-9000.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-from-table-pgf-9000.tex)
+
+![](./out/dynamic-barchart-from-table-pgf-9000.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-from-table-pgf-9000.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-from-table-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-from-table-pgf.tex)
+
+![](./out/dynamic-barchart-from-table-pgf.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-from-table-pgf.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star].tex)
+
+![](./out/dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star].png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-pgfplotsinvokeforeach-multicolor-9000[4star].tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star].tex)
+
+![](./out/dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star].png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-pgfplotsinvokeforeach-multicolor[4star].tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-read-xticklabels-fm-table-[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-read-xticklabels-fm-table-[4star].tex)
+
+![](./out/dynamic-barchart-read-xticklabels-fm-table-[4star].png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-read-xticklabels-fm-table-[4star].tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-read-xticklabels-fm-table-resume-[4star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-read-xticklabels-fm-table-resume-[4star].tex)
+
+![](./out/dynamic-barchart-read-xticklabels-fm-table-resume-[4star].png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-read-xticklabels-fm-table-resume-[4star].tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-transposing-table-[5star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-transposing-table-[5star].tex)
+
+![](./out/dynamic-barchart-transposing-table-[5star].png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-transposing-table-[5star].tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-transposing-table-9000-[5star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-transposing-table-9000-[5star].tex)
+
+![](./out/dynamic-barchart-transposing-table-9000-[5star].png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-transposing-table-9000-[5star].tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-transposing-table-resume-[5star].tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-transposing-table-resume-[5star].tex)
+
+![](./out/dynamic-barchart-transposing-table-resume-[5star].png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-transposing-table-resume-[5star].tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-barchart-xticks-fm-data.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-barchart-xticks-fm-data.tex)
+
+![](./out/dynamic-barchart-xticks-fm-data.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-barchart-xticks-fm-data.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [dynamic-linechart-read-from-table-pgf.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/dynamic-linechart-read-from-table-pgf.tex)
+
+![](./out/dynamic-linechart-read-from-table-pgf.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/dynamic-linechart-read-from-table-pgf.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [military_budget.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/military_budget.tex)
+
+![](./out/military_budget.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/military_budget.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [stacked_bar_with_text.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/stacked_bar_with_text.tex)
+
+![](./out/stacked_bar_with_text.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/stacked_bar_with_text.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [table-text.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/table-text.tex)
+
+![](./out/table-text.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/table-text.tex"), sep = "\n")
+```
+`r b`
+****
+
+### [two_time_series_with_bounds.tex](https://github.com/f0nzie/tikz_bars/blob/master/src/two_time_series_with_bounds.tex)
+
+![](./out/two_time_series_with_bounds.png)
+
+  
+
+
+`r a`
+```{r}
+# change pgf to tex
+cat(readLines("./src/two_time_series_with_bounds.tex"), sep = "\n")
 ```
 `r b`

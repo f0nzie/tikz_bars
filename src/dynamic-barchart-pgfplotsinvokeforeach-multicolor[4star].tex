@@ -1,0 +1,86 @@
+% different color for each bar
+% https://tex.stackexchange.com/questions/264007/histogram-different-color-for-each-bar?noredirect=1&lq=1
+
+% Since xtick=data places labels for the data on the first plot only, 
+% the first plot is left out of the loop to get all the labels:
+
+\documentclass[a4paper,twoside,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage{pgfplotstable}
+
+% tight page
+\usepackage[active,tightpage]{preview}  % set tight page
+\PreviewEnvironment{tikzpicture}        % preview tikz
+\setlength\PreviewBorder{20pt}%         % gap around plot
+
+\definecolor{color1}{rgb}{0.98, 0.81, 0.69}
+\definecolor{color2}{rgb}{0.55, 0.71, 0.0}
+\definecolor{color3}{rgb}{1.0, 0.6, 0.4}
+\definecolor{color4}{rgb}{0.29, 0.59, 0.82}
+
+\pgfplotscreateplotcyclelist{mycolor}{
+{fill=color1!80, draw=color1},
+{fill=color2!80, draw=color2},
+{fill=color3!80, draw=color3},
+{fill=color4!80, draw=color4},
+}
+
+\pgfplotsset{
+    discard if/.style 2 args={
+        x filter/.code={
+            \ifdim\thisrow{#1} pt=#2pt
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    },
+    discard if not/.style 2 args={
+        x filter/.code={
+            \ifdim\thisrow{#1} pt=#2pt
+            \else
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    }
+}
+
+
+\begin{filecontents*}{coefficienti.dat}
+T       K       Q       Kf      n
+400     0.0463  32.9   5.78   0.321
+500     0.124   24.8   6.30   0.275
+600     0.115   24.6   6.30   0.261
+700     1.64    24.4   11.9   0.151
+\end{filecontents*}
+
+\begin{document}
+
+\begin{tikzpicture}
+    \begin{axis} [
+        ymin=0,
+        ybar=0, bar width=20, bar shift=0,
+        xtick={data},
+        ymajorgrids=true,
+        cycle list name=mycolor,
+        nodes near coords,
+        every node near coord/.append style = {
+            /pgf/number format/.cd,
+            fixed,
+            fixed zerofill,
+            precision=3
+        }]
+
+	% first complete plot to place the x-axis labels
+	\addplot+ table[x=T,y=K] {coefficienti.dat};
+	
+	% the bars with different colors
+	\pgfplotsinvokeforeach{500,600,700} {        
+		\addplot+ [discard if not={T}{#1}] table[x=T,y=K] {coefficienti.dat};
+	}
+
+	\end{axis}
+\end{tikzpicture}
+
+\end{document}
